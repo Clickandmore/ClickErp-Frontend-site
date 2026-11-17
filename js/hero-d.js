@@ -214,7 +214,7 @@
         .to(ringMain.el, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut' }, 0)
         .from(ringEcho, { opacity: 0, duration: 1 }, .2)
         .from($$('.hd-w', S[0]), { yPercent: 35, opacity: .3, duration: .7, stagger: .06 }, .2)
-        .from([$('.hd-eyebrow', S[0]), $('.hd-lead', S[0]), $('.hd-ctas', S[0])], { y: 16, autoAlpha: 0, duration: .6, stagger: .1 }, .5)
+        .from([$('.hd-eyebrow', S[0]), $('.hd-lead', S[0]), $('.hd-ctas', S[0]), $('.hd-proof', S[0])].filter(Boolean), { y: 16, autoAlpha: 0, duration: .6, stagger: .1 }, .5)
         .to(L.cursor, { x: p0.x - tip, y: p0.y - tip, autoAlpha: 1, duration: .9, ease: 'power3.out' }, .4)
         .to(L.cursor, { scale: .82, duration: .12, yoyo: true, repeat: 1, ease: 'power1.inOut' }, 1.3)
         .fromTo(pulse, { attr: { r: 4 }, opacity: .9 }, { attr: { r: 40 }, opacity: 0, duration: .7 }, 1.35)
@@ -225,9 +225,11 @@
     /* ---- the scrubbed story ---- */
     const tl = gsap.timeline({
       defaults: { ease: 'power2.inOut' },
+      // UI (progress + header) follows the timeline itself, so it stays correct while the
+      // scrub keeps easing after the scroll has stopped (ScrollTrigger.onUpdate only fires on scroll)
+      onUpdate() { syncUI(this.time()); },
       scrollTrigger: {
         trigger: stage, start: 'top top', end: '+=480%', pin: true, scrub: SCRUB, anticipatePin: 1,
-        onUpdate(self) { syncUI(self.animation.time()); },
       },
     });
     current = tl;
@@ -333,10 +335,16 @@
     const at = params.get('at');
     const frame = params.get('frame');
     if (frame && current) {
-      // QA: render one scene at the top of the page without scrolling (for headless screenshots)
-      current.scrollTrigger.disable(false);
-      current.seek(/^[\d.]+$/.test(frame) ? parseFloat(frame) : frame, false); // label (s1–s5) or a time
-      syncUI(current.time());
+      // QA: render one scene at the top of the page without scrolling (for headless screenshots).
+      // Re-applied after every ScrollTrigger refresh (homepage sections below can trigger one on load).
+      const pinFrame = () => {
+        if (!current || !current.scrollTrigger) return;
+        current.scrollTrigger.disable(false);
+        current.seek(/^[\d.]+$/.test(frame) ? parseFloat(frame) : frame, false); // label (s1–s5) or a time
+        syncUI(current.time());
+      };
+      pinFrame();
+      ScrollTrigger.addEventListener('refresh', pinFrame);
     } else if (at) {
       requestAnimationFrame(() => goTo(at, false));
     }

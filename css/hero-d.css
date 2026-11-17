@@ -7,7 +7,39 @@
    - Colour rule: green fills carry NAVY text; green is never text on white
    ========================================================================== */
 
-.pd { --edge: max(48px, calc((100vw - 1320px) / 2)); --copy-w: min(600px, 42vw); background: var(--paper); }
+.pd {
+  --edge: max(48px, calc((100vw - 1320px) / 2)); --copy-w: min(600px, 42vw); background: var(--paper);
+  /* ---- D + A type & spacing scale (UI UX Pro Max audit, 2026-11-17) ----
+     Display sizes are tuned so the longest designed headline line fits its column
+     (S1 «كل أعمال الاستقدام» ≈ 8.8 × font-size wide). Arabic display needs ≥1.3
+     line-height for dots/marks and the highlight chip. Body 1.75 (guideline 1.5–1.75). */
+  --fs-hero: clamp(2.5rem, 1rem + 3.5vw, 4.25rem);          /* 40 → 68  · scene 1 <h1>; ≤ 46vw / 8.8 so 2 lines from 1024 up */
+  --fs-scene: clamp(2.125rem, 1.15rem + 2.6vw, 3.5rem);     /* 34 → 56  · scenes 2–5 */
+  --fs-hero-lead: clamp(1.0625rem, .95rem + .5vw, 1.3125rem); /* 17 → 21 */
+  --fs-hero-eyebrow: clamp(.875rem, .82rem + .18vw, 1rem);  /* 14 → 16 */
+  /* Arabic leading scale (reviewed visually 2026-11-17: 1.30 let «الاستقدام» touch the chip below,
+     1.50 split the headline apart; 1.42 keeps one block with clear room for dots and descenders).
+     Arabic text sets taller than Latin, so body sits above the Latin 1.5–1.75 guideline. */
+  --lh-display: 1.42;   /* ≥ 34px: hero, scene, page and section titles */
+  --lh-heading: 1.5;    /* 20–44px: card, panel and case titles (h3) */
+  --lh-lead: 1.9;       /* 17–21px intro paragraphs */
+  --lh-body: 1.85;      /* 16–17px running text */
+  --lh-compact: 1.8;    /* list items and ≤ 15px supporting text */
+  /* Grouped vertical rhythm (proximity): label hugs its title, the lead belongs to
+     the title, actions are set apart. Was a uniform 22px between everything. */
+  --sp-label: clamp(10px, .9vw, 14px);   /* eyebrow → title */
+  --sp-lead: clamp(16px, 1.6vw, 24px);   /* title → lead */
+  --sp-act: clamp(28px, 2.8vw, 40px);    /* lead → CTAs / steps */
+  --copy-w-hero: min(660px, 46vw);       /* scene 1: fits «كل أعمال الاستقدام» on one line at 68px */
+}
+/* Header on the same grid as the content (logo edge = headline edge; was 28px off at 1920) */
+@media (min-width: 1024px) { .pd .c-header__inner { max-inline-size: none; padding-inline: var(--edge); } }
+/* Headings: balanced wrapping as a progressive enhancement; Arabic keeps default kerning, no tracking */
+.pd :is(h1, h2, h3) { text-wrap: balance; font-kerning: normal; }
+/* Base leading for D + A pages (shared tokens.css stays 1.8). Headings no longer inherit the body
+   value (a 44px h3 at 1.8 was too loose); :where() keeps specificity 0 so component rules still win. */
+body.pd { line-height: var(--lh-body); }
+:where(.pd) :where(h1, h2, h3, h4) { line-height: var(--lh-heading); }
 
 /* ---------- Header: fixed overlay → solid on the light page (as V4) ---------- */
 .pd .c-header { position: fixed; transition: background-color 300ms var(--ease-standard), color 300ms, box-shadow 300ms; }
@@ -26,12 +58,16 @@
    Shared copy styles (both modes)
    =========================================================================== */
 .hd { position: relative; isolation: isolate; overflow: clip; background: var(--navy-950); color: var(--white); }
-.hd-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
-.hd-eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font-size: var(--fs-eyebrow); font-weight: 600; color: var(--green-300); }
+.hd-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
+.hd-copy > .hd-eyebrow { margin-block-end: var(--sp-label); }
+.hd-copy > .hd-lead { margin-block-start: var(--sp-lead); }
+.hd-copy > .hd-ctas, .hd-copy > .hd-steps { margin-block-start: var(--sp-act); }
+.hd-eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font-size: var(--fs-hero-eyebrow); font-weight: 600; line-height: 1.5; color: var(--green-300); }
+.hd-s1 .hd-eyebrow::before { content: ""; inline-size: 24px; block-size: 2px; background: currentColor; border-radius: 2px; } /* same label mark as scenes 2–5 */
 .hd-num { font-family: var(--font-display); letter-spacing: .04em; }
 .hd-num::after { content: ""; display: inline-block; inline-size: 24px; block-size: 2px; margin-inline-start: 10px; vertical-align: middle; background: currentColor; border-radius: 2px; }
-.hd-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-display-2); line-height: 1.28; }
-.hd-s1 .hd-title { font-size: var(--fs-display); line-height: 1.22; }
+.hd-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-scene); line-height: var(--lh-display); }
+.hd-s1 .hd-title { font-size: var(--fs-hero); }
 .hd-line { display: block; }
 .hd-w { display: inline-block; }
 
@@ -43,13 +79,19 @@
   padding-inline: .22em; border-radius: .14em;
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
 }
-.hd-lead { margin: 0; max-inline-size: 46ch; font-size: var(--fs-lead); line-height: 1.8; color: var(--slate-on-dark); }
+.hd-lead { margin: 0; max-inline-size: 46ch; font-size: var(--fs-hero-lead); line-height: var(--lh-lead); color: var(--slate-on-dark); text-wrap: balance; } /* 2–3 line intros: even lines, no 2-word orphan */
+/* Proof line under the scene-1 actions: a hairline, then 3 short facts (confirmed figures / proposal) */
+.hd-copy > .hd-proof { margin-block-start: var(--sp-act); }
+.hd-proof { align-self: stretch; display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; padding: 18px 0 0; list-style: none; border-block-start: 1px solid rgba(255, 255, 255, .12); font-size: var(--fs-small); line-height: var(--lh-compact); color: var(--slate-on-dark); }
+.hd-proof li { position: relative; padding-inline-start: 14px; white-space: nowrap; } /* every fact has its own dot, so a wrapped line still starts cleanly */
+.hd-proof li::before { content: ""; position: absolute; inset-inline-start: 0; top: 50%; inline-size: 5px; block-size: 5px; margin-block-start: -2.5px; border-radius: 50%; background: var(--green-500); }
+.hd-proof b { font-family: var(--font-display); font-weight: 700; color: var(--white); }
 .hd-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
 .hd-ctas .ph { font-size: 1.15em; }
 
 /* Journey steps: the dot column sits on the inline-END edge (between photo and copy),
    so in pinned mode the green ribbon runs through every dot */
-.hd-steps { position: relative; inline-size: min(100%, 400px); margin: 4px 0 0; padding: 0; list-style: none; }
+.hd-steps { position: relative; inline-size: min(100%, 400px); margin: 0; padding: 0; list-style: none; }
 .hd-steps::before { content: ""; position: absolute; inset-block: 18px; inset-inline-end: 6px; inline-size: 2px; background: rgba(255, 255, 255, .14); border-radius: 2px; }
 .hd-step { display: grid; grid-template-columns: 1fr 14px; align-items: center; gap: 16px; padding-block: 8px; font-size: 1.0625rem; color: var(--white); }
 .hd-step__dot { position: relative; z-index: 1; inline-size: 14px; block-size: 14px; border-radius: 50%; background: var(--green-500); }
@@ -136,7 +178,9 @@
 .hd-scrim--3 { background: linear-gradient(to right, rgba(14, 22, 38, .94) 0%, rgba(14, 22, 38, .6) 36%, rgba(14, 22, 38, 0) 62%), linear-gradient(0deg, rgba(14, 22, 38, .6), rgba(14, 22, 38, 0) 30%); }
 .hd-scrim--4 { background: linear-gradient(180deg, rgba(14, 22, 38, .2) 0%, rgba(14, 22, 38, .25) 42%, rgba(14, 22, 38, .96) 100%); }
 .hd-slot { position: absolute; visibility: hidden; pointer-events: none; }
-.hd-slot--lens { --d: min(62svh, 36vw); inline-size: var(--d); block-size: var(--d); inset-inline-end: calc(29% - var(--d) / 2); inset-block-start: calc(54% - var(--d) / 2); }
+/* Lens: vertically centred on the scene-1 copy area (header + 32 … height − 88), so photo and text share one
+   axis (was 54% → 21–29px lower than the copy); 34vw at 26% keeps ≥ 48px between photo and text from 1024 up */
+.hd-slot--lens { --d: min(62svh, 34vw); inline-size: var(--d); block-size: var(--d); inset-inline-end: calc(26% - var(--d) / 2); inset-block-start: calc((100% + var(--header-h) - 56px) / 2 - var(--d) / 2); }
 .hd-slot--card { inset-inline-end: var(--edge); inset-block-start: calc(var(--header-h) + 40px); inset-block-end: 96px; inline-size: calc(100% - var(--edge) * 2 - var(--copy-w) - 96px); }
 .hd-light { position: absolute; inset: 0; z-index: 6; background: var(--paper); clip-path: circle(0 at 50% 50%); }
 
@@ -150,23 +194,24 @@
 
 /* Scene layouts (pinned) */
 .hd.is-pinned .hd-s1, .hd.is-pinned .hd-s2 { display: grid; align-content: center; justify-items: start; }
-.hd.is-pinned .hd-s1 .hd-copy, .hd.is-pinned .hd-s2 .hd-copy { inline-size: var(--copy-w); }
+.hd.is-pinned .hd-s1 .hd-copy { inline-size: var(--copy-w-hero); }
+.hd.is-pinned .hd-s2 .hd-copy { inline-size: var(--copy-w); }
 .hd.is-pinned .hd-s2 .hd-steps::before { display: none; }       /* the ribbon replaces the static track */
 .hd.is-pinned .hd-s3 { display: grid; align-content: center; justify-items: end; }
-.hd.is-pinned .hd-s3 .hd-copy { inline-size: min(520px, 38vw); }
+.hd.is-pinned .hd-s3 .hd-copy { inline-size: clamp(410px, 38vw, 540px); } /* «كل تفاصيل أعمالك» ≈ 8.7em must fit on one line */
 .hd.is-pinned .hd-s3 .hd-kpis { display: block; position: absolute; inset: 0; pointer-events: none; }
 .hd.is-pinned .hd-kpi { position: absolute; }
 .hd.is-pinned .hd-kpi:nth-child(1) { inset-inline-start: 10%; inset-block-start: 22%; }
 .hd.is-pinned .hd-kpi:nth-child(2) { inset-inline-start: 4%;  inset-block-start: 42%; }
 .hd.is-pinned .hd-kpi:nth-child(3) { inset-inline-start: 17%; inset-block-start: 63%; }
 .hd.is-pinned .hd-s4 { display: grid; align-content: end; justify-items: center; text-align: center; padding-block-end: 92px; }
-.hd.is-pinned .hd-s4 .hd-copy { align-items: center; gap: 14px; }
+.hd.is-pinned .hd-s4 .hd-copy { align-items: center; }
 .hd.is-pinned .hd-s4 .hd-title .hd-line { display: inline; }
 .hd.is-pinned .hd-s4 .hd-orbit { display: block; position: absolute; inset: 0; pointer-events: none; }
 .hd.is-pinned .hd-s4 .hd-orbit li { position: absolute; left: 0; top: 0; }
 .hd.is-pinned .hd-s5 { display: grid; grid-template-rows: auto minmax(0, 1fr); justify-items: center; gap: 28px; padding-block: calc(var(--header-h) + 24px) 80px; color: var(--navy-900); text-align: center; }
-.hd.is-pinned .hd-s5 .hd-copy { align-items: center; gap: 16px; }
-.hd.is-pinned .hd-s5 .hd-lead { max-inline-size: 60ch; }
+.hd.is-pinned .hd-s5 .hd-copy { align-items: center; }
+.hd.is-pinned .hd-s5 .hd-lead { max-inline-size: 50ch; } /* centred text reads best short and balanced */
 .hd.is-pinned .hd-s5 .hd-media { display: block; inline-size: min(100%, 1240px); block-size: 100%; aspect-ratio: auto; min-block-size: 0; }
 
 /* Progress: bottom inline-end corner */
