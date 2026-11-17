@@ -4,8 +4,8 @@
    function render(p) of scroll progress p ∈ [0, 3] (one viewport per step).
    A real laptop render travels left → centre → right → centre-low and changes
    its ANGLE (four photos) as it moves; the ClickERP UI is projected onto each
-   photo's screen with a homography (matrix3d). The background (light, orbit
-   rings, floor grid, giant outlined words) follows the laptop's position.
+   photo's screen with a homography (matrix3d). The environment is five restrained layers
+   (base, ambient light, grid, journey paths, grounding) driven by the same p.
    Native scroll only. Static stacked layout for reduced motion / narrow / short
    screens / no GSAP. QA: ?p=1.5 · ?scrolltest=1 · ?static=1
    ========================================================================== */
@@ -17,8 +17,9 @@
   function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   var stage = $('.lj-stage', root), chs = $$('.lj-ch', root), shots = chs.map(function (c) { return $('.lj-shot', c); });
   var copies = chs.map(function (c) { return $$('.lj-copy, .lj-points', c); });
-  var chips = $('.lj-chips', root), glowA = $('.lj-glow--a', root), glowB = $('.lj-glow--b', root), orbit = $('.lj-orbit', root), floor = $('.lj-floor', root);
-  var words = $$('.lj-words span', root), rail = $$('.lj-rail button', root), hint = $('.lj-hint', root);
+  var chips = $('.lj-chips', root), ambA = $('.lj-amb--a', root), ambB = $('.lj-amb--b', root), grid = $('.lj-grid', root), pathsEl = $('.lj-paths', root), pool = $('.lj-pool', root), shadow = $('.lj-shadow', root);
+  var SEG = []; // the laptop's journey as drawable path segments (built in measure)
+  var rail = $$('.lj-rail button', root), hint = $('.lj-hint', root);
   var track = $('[data-track]', root), stageLis = $$('.ui-track li', root), statusEl = $('[data-status]', root), bars = $('[data-bars]', root);
   var STAGES = ['طلب جديد', 'مساند', 'التفويض', 'التأشيرة', 'التذكرة', 'الوصول', 'الضمان', 'مكتمل'];
   var N = chs.length, SW = 720, SH = 450, IMG_W = 1536;
@@ -71,7 +72,27 @@
   var G = null, lastCur = -1;
   function measure() { var r = stage.getBoundingClientRect(); G = { w: r.width, h: r.height, wd: Math.min(r.width * .64, r.height * 1.08) }; root.style.setProperty('--wd', r1(G.wd) + 'px');
     var short = r.height < 760; POSE[3].cy = short ? .93 : .78; POSE[3].s = short ? 1.02 : 1.22; // short screens: keep the laptop clear of the closing CTAs
-    projectAll(); }
+    buildPaths(); projectAll(); }
+  // Layer 4: the journey itself. A smooth curve through the laptop's four resting points (Catmull-Rom → cubic), plus two
+  // quiet parallel echoes. Each segment is drawn exactly as the laptop travels it, so the lines can never drift from it.
+  function buildPaths() {
+    var NSV = 'http://www.w3.org/2000/svg', P = POSE.map(function (q) { return [q.cx * G.w, q.cy * G.h]; });
+    SEG.forEach(function (sg) { sg.els.forEach(function (e) { e.remove(); }); }); SEG = [];
+    pathsEl.setAttribute('viewBox', '0 0 ' + r1(G.w) + ' ' + r1(G.h));
+    for (var i = 0; i < P.length - 1; i++) {
+      var p0 = P[Math.max(0, i - 1)], p1 = P[i], p2 = P[i + 1], p3 = P[Math.min(P.length - 1, i + 2)];
+      var c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6], c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+      var dx = p2[0] - p1[0], dy = p2[1] - p1[1], L = Math.hypot(dx, dy) || 1, nx = -dy / L, ny = dx / L, sg = { els: [], paths: [], dots: [] };
+      [0, 64, -64].forEach(function (off, k) {
+        var o = function (q) { return r1(q[0] + nx * off) + ' ' + r1(q[1] + ny * off); };
+        var el = document.createElementNS(NSV, 'path'); el.setAttribute('d', 'M' + o(p1) + ' C' + o(c1) + ' ' + o(c2) + ' ' + o(p2));
+        el.setAttribute('class', k ? 'echo' : 'main'); el.setAttribute('pathLength', '1'); el.style.strokeDasharray = '1'; el.style.strokeDashoffset = '1';
+        pathsEl.appendChild(el); sg.els.push(el); sg.paths.push(el);
+        if (k) { var dot = document.createElementNS(NSV, 'circle'); dot.setAttribute('r', '2.6'); pathsEl.appendChild(dot); sg.els.push(dot); sg.dots.push({ el: dot, path: el, len: el.getTotalLength() }); }
+      });
+      SEG.push(sg);
+    }
+  }
   function render(p) {
     if (!G) return;
     var i0 = Math.min(N - 2, Math.floor(p)), f = p - i0, t = smooth(clamp((f - .12) / .76, 0, 1));
@@ -104,11 +125,34 @@
       });
     });
     // background follows the laptop
-    glowA.style.transform = 'translate3d(' + r1(cx) + 'px,' + r1(cy) + 'px,0)';
-    glowB.style.transform = 'translate3d(' + r1(G.w - cx) + 'px,' + r1(cy * .45) + 'px,0)';
-    orbit.style.transform = 'translate3d(' + r1(cx) + 'px,' + r1(cy) + 'px,0) scale(' + (G.wd * sc * 1.2 / 1000).toFixed(4) + ') rotate(' + r1(p * 46) + 'deg)';
-    floor.style.backgroundPosition = r1((cx - G.w / 2) * -.25) + 'px ' + r1(p * 110) + 'px';
-    words.forEach(function (wd, i) { var d = p - i; wd.style.opacity = r3(clamp(1 - 1.5 * Math.abs(d), 0, 1) * .3); wd.style.transform = 'translate3d(calc(-50% + ' + r1(d * -34) + 'vw), -62%, 0)'; });
+    // ---- environment, all from the same p / t / pose as the laptop ----
+    var last = i0 === N - 2 ? t : 0, k = G.wd * sc2 / 920, baseY = cy + G.wd * sc2 * lerp(.205, .13, last);
+    var centre = 1 - Math.min(1, Math.abs(cx / G.w - .5) / .2);                 // 1 when the laptop is centre stage (showcase)
+    var dissolve = 1 - clamp((p - (N - 1 - .22)) / .22, 0, 1);                  // stage 5: geometry fades as the story ends
+    // 2 · ambient light sits behind the laptop's visual centre; it widens and brightens for the centre showcase
+    ambA.style.transform = 'translate3d(' + r1(cx) + 'px,' + r1(cy - G.h * .04) + 'px,0) scale(' + (k * (1 + .22 * centre)).toFixed(3) + ')';
+    ambA.style.opacity = r3(.82 + .18 * centre);
+    ambB.style.transform = 'translate3d(' + r1(cx + (G.w / 2 - cx) * .9 + G.w * .16) + 'px,' + r1(cy - G.h * .26) + 'px,0) scale(' + k.toFixed(3) + ')';
+    // 3 · the grid is only revealed around the laptop; it drifts with a little parallax and grows with the laptop's scale
+    grid.style.setProperty('--gx', r1(cx + 120) + 'px'); grid.style.setProperty('--gy', r1(cy + 120) + 'px');
+    grid.style.backgroundPosition = r1((.5 - cx / G.w) * 46) + 'px ' + r1(p * -18) + 'px';
+    grid.style.backgroundSize = r1(88 * (.94 + .12 * sc2)) + 'px ' + r1(88 * (.94 + .12 * sc2)) + 'px';
+    grid.style.opacity = r3(.9 * dissolve);
+    // 4 · the journey: each segment draws while the laptop travels it, then rests at low opacity; two small signals run ahead
+    SEG.forEach(function (sg, i) {
+      var ts = i < i0 ? 1 : i === i0 ? t : 0;
+      sg.paths.forEach(function (el) { el.style.strokeDashoffset = r3(1 - ts); });
+      sg.dots.forEach(function (dt, j) {
+        var u = clamp(ts * 1.12 + .04 * j, 0, 1), on = i === i0 && ts > .02 && u < 1;
+        if (on) { var q = dt.path.getPointAtLength(dt.len * u); dt.el.setAttribute('cx', r1(q.x)); dt.el.setAttribute('cy', r1(q.y)); }
+        dt.el.style.opacity = on ? r3(.75 * Math.sin(Math.PI * u)) : 0;
+      });
+    });
+    pathsEl.style.opacity = r3(dissolve);
+    // 5 · grounding: a contact shadow and a little reflected light under the base (softer and wider when seen from above)
+    shadow.style.transform = 'translate3d(' + r1(cx) + 'px,' + r1(baseY) + 'px,0) scale(' + (k * lerp(1, 1.15, last)).toFixed(3) + ',' + (k * lerp(1, 2.1, last)).toFixed(3) + ')';
+    shadow.style.opacity = r3(lerp(.95, .6, last) * (1 - .35 * arc));
+    pool.style.transform = 'translate3d(' + r1(cx) + 'px,' + r1(baseY + 26 * k) + 'px,0) scale(' + k.toFixed(3) + ',' + (k * lerp(1, 1.5, last)).toFixed(3) + ')';
     // screens
     setT(clamp((p - .62) / .68, 0, 1) * 7);
     bars.style.setProperty('--g', r3(smooth(clamp((p - 1.55) / .4, 0, 1))));
@@ -117,7 +161,7 @@
     state.p = p;
   }
   function clearAll() {
-    shots.concat([chips, glowA, glowB, orbit, floor, hint], words).forEach(function (el) { el.removeAttribute('style'); });
+    shots.concat([chips, ambA, ambB, grid, pathsEl, pool, shadow, hint]).forEach(function (el) { el.removeAttribute('style'); });
     copies.forEach(function (els) { els.forEach(function (el) { el.removeAttribute('style'); el.removeAttribute('inert'); el.classList.remove('is-on'); el._on = undefined; }); });
     root.style.removeProperty('--wd'); setT(7); bars.style.setProperty('--g', 1); lastCur = -1; projectAll();
   }
