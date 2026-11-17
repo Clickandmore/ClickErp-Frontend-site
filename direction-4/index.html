@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>رحلة الشاشة · تجربة 02 · نظام كليك</title>
+<meta name="description" content="تجربة حركة معزولة: حاسوب حقيقي يتحرك ويغيّر زاويته مع التمرير في واجهة نظام كليك.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="preload" as="image" href="assets/left.webp">
+<link rel="stylesheet" href="lj.css">
+</head>
+<body>
+<a class="lj-skip" href="#after">تخطَّ التجربة</a>
+<header class="lj-head">
+  <a class="lj-logo" href="#" aria-label="نظام كليك"><img src="assets/clickerp-logo-white.png" alt="" width="613" height="268"></a>
+  <span class="lj-badge">تجربة 02 · رحلة الشاشة</span>
+  <a class="lj-btn lj-btn--primary lj-btn--sm lj-head__cta" href="#">احجز عرضًا توضيحيًا</a>
+</header>
+
+<main>
+<div class="lj" id="lj">
+  <div class="lj-stage">
+    <!-- background: reacts to the laptop's position -->
+    <div class="lj-bg" aria-hidden="true">
+      <div class="lj-glow lj-glow--a"></div>
+      <div class="lj-glow lj-glow--b"></div>
+      <div class="lj-floor"></div>
+      <svg class="lj-orbit" viewBox="0 0 1000 1000">
+        <circle cx="500" cy="500" r="300" pathLength="360" stroke-dasharray="70 50"/>
+        <circle cx="500" cy="500" r="390" pathLength="360" stroke-dasharray="2 10"/>
+        <circle cx="500" cy="500" r="480" pathLength="360" stroke-dasharray="120 240"/>
+      </svg>
+      <div class="lj-words"><span>نظام واحد</span><span>مراحل العقد</span><span>المالية</span><span>ابدأ الآن</span></div>
+    </div>
+
+    <!-- chapter 0 · hero -->
+    <section class="lj-ch" data-ch="0" data-side="start" aria-labelledby="lj-h1">
+      <figure class="lj-shot" data-quad="279,196 851,138 914,540 353,639">
+        <img src="assets/left.webp" alt="حاسوب محمول يعرض لوحة نظام كليك (بيانات تجريبية)" width="1536" height="1024">
+        <div class="lj-screen" aria-hidden="true"><div class="ui">
+          <aside class="ui-side"><b></b><i class="ph ph-house on"></i><i class="ph ph-file-text"></i><i class="ph ph-users-three"></i><i class="ph ph-receipt"></i><i class="ph ph-chart-bar"></i></aside>
+          <div class="ui-main">
+            <p class="ui-title">لوحة المؤشرات <span>بيانات تجريبية</span></p>
+            <div class="ui-kpis"><div><small>عقود نشطة</small><b>128</b></div><div><small>بانتظار التأشيرة</small><b>24</b></div><div><small>وصول هذا الأسبوع</small><b>9</b></div></div>
+            <ul class="ui-rows"><li><b>#2418</b><span>عميل 1042</span><em class="g">طلب جديد</em></li><li><b>#2407</b><span>عميل 0988</span><em>التذكرة</em></li><li><b>#2399</b><span>عميل 1120</span><em>مساند</em></li><li><b>#2391</b><span>عميل 1007</span><em>التأشيرة</em></li></ul>
+          </div>
+        </div></div>
+      </figure>
+      <ul class="lj-chips" aria-hidden="true">
+        <li style="--x:-25%;--y:-33%"><i class="ph ph-clipboard-text"></i>الطلبات</li>
+        <li style="--x:-29%;--y:4%"><i class="ph ph-file-text"></i>العقود</li>
+        <li style="--x:30%;--y:-36%"><i class="ph ph-receipt"></i>المالية</li>
+        <li style="--x:36%;--y:14%"><i class="ph ph-users-three"></i>العملاء</li>
+      </ul>
+      <div class="lj-copy">
+        <p class="lj-eyebrow">نظام كليك لإدارة مكاتب وشركات الاستقدام</p>
+        <h1 id="lj-h1" class="lj-h lj-h--1">كل أعمال الاستقدام <em>في نظام واحد</em></h1>
+        <p class="lj-lead">الطلبات والعقود والمالية والعملاء في منصة سعودية واحدة، مبنية من داخل القطاع.</p>
+        <div class="lj-ctas"><a class="lj-btn lj-btn--primary" href="#">احجز عرضًا توضيحيًا</a><a class="lj-btn lj-btn--ghost" href="#">اكتشف النظام</a></div>
+      </div>
+    </section>
+
+    <!-- chapter 1 · contract stages -->
+    <section class="lj-ch" data-ch="1" data-side="split" aria-labelledby="lj-h2a">
+      <figure class="lj-shot" data-quad="402,174 1133,174 1132,623 404,623">
+        <img src="assets/front.webp" alt="شاشة مراحل العقد في نظام كليك (بيانات تجريبية)" width="1536" height="1024" loading="lazy">
+        <div class="lj-screen" aria-hidden="true"><div class="ui">
+          <aside class="ui-side"><b></b><i class="ph ph-house"></i><i class="ph ph-file-text on"></i><i class="ph ph-users-three"></i><i class="ph ph-receipt"></i><i class="ph ph-chart-bar"></i></aside>
+          <div class="ui-main">
+            <p class="ui-title">عقد #2418 <span>بيانات تجريبية</span><em class="ui-status" data-status>طلب جديد</em></p>
+            <div class="ui-track" data-track style="--t:0">
+              <i class="ui-track__line"></i><i class="ui-track__fill"></i>
+              <ol><li>طلب جديد</li><li>مساند</li><li>التفويض</li><li>التأشيرة</li><li>التذكرة</li><li>الوصول</li><li>الضمان</li><li>مكتمل</li></ol>
+              <b class="ui-token">#2418</b>
+            </div>
+            <ul class="ui-rows ui-rows--check"><li><i class="ph-fill ph-check-circle"></i>تسجيل الطلب واختيار السيرة الذاتية</li><li><i class="ph-fill ph-check-circle"></i>التفويض والتأشيرة</li><li><i class="ph-fill ph-check-circle"></i>حجز التذكرة ومتابعة الوصول</li></ul>
+          </div>
+        </div></div>
+      </figure>
+      <div class="lj-copy">
+        <p class="lj-eyebrow"><span>01</span>مراحل العقد</p>
+        <h2 id="lj-h2a" class="lj-h">من أول طلب <em>حتى اكتمال العقد</em></h2>
+        <p class="lj-lead">يتقدّم العقد مرحلة بعد مرحلة أمام فريقك، من الطلب حتى الوصول.</p>
+      </div>
+      <ul class="lj-points">
+        <li><i class="ph ph-path"></i>مراحل واضحة لكل عقد</li>
+        <li><i class="ph ph-user-focus"></i>كل موظف يعرف المطلوب منه</li>
+        <li><i class="ph ph-folder-simple-user"></i>العميل وعقده في ملف واحد</li>
+      </ul>
+    </section>
+
+    <!-- chapter 2 · finance and reports -->
+    <section class="lj-ch" data-ch="2" data-side="end" aria-labelledby="lj-h2b">
+      <figure class="lj-shot" data-quad="696,151 1252,176 1181,624 629,529">
+        <img src="assets/right.webp" alt="شاشة المالية والتقارير في نظام كليك (بيانات تجريبية)" width="1536" height="1024" loading="lazy">
+        <div class="lj-screen" aria-hidden="true"><div class="ui">
+          <aside class="ui-side"><b></b><i class="ph ph-house"></i><i class="ph ph-file-text"></i><i class="ph ph-users-three"></i><i class="ph ph-receipt on"></i><i class="ph ph-chart-bar"></i></aside>
+          <div class="ui-main">
+            <p class="ui-title">المالية والتقارير <span>بيانات تجريبية</span></p>
+            <div class="ui-fin">
+              <div class="ui-inv"><small>فاتورة 0412</small><b>7,500 <small>ر.س</small></b><em>مدفوعة</em></div>
+              <ul class="ui-bars" data-bars style="--g:1"><li><span>الرياض</span><i style="--w:.86"></i><b>34</b></li><li><span>جدة</span><i style="--w:.66"></i><b>26</b></li><li><span>الدمام</span><i style="--w:.43"></i><b>17</b></li><li><span>أبها</span><i style="--w:.3"></i><b>12</b></li></ul>
+            </div>
+          </div>
+        </div></div>
+      </figure>
+      <div class="lj-copy">
+        <p class="lj-eyebrow"><span>02</span>المالية والتقارير</p>
+        <h2 id="lj-h2b" class="lj-h">كل تفاصيل أعمالك <em>أمامك بوضوح</em></h2>
+        <p class="lj-lead">الفواتير والمستحقات ومؤشرات الفروع في لوحة واحدة.</p>
+      </div>
+    </section>
+
+    <!-- chapter 3 · conversion -->
+    <section class="lj-ch" data-ch="3" data-side="top" aria-labelledby="lj-h2c">
+      <figure class="lj-shot" data-quad="389,194 944,102 983,459 440,575">
+        <img src="assets/top.webp" alt="حاسوب محمول يعرض عقدًا مكتملًا في نظام كليك (بيانات تجريبية)" width="1536" height="1024" loading="lazy">
+        <div class="lj-screen" aria-hidden="true"><div class="ui ui--done">
+          <i class="ph-fill ph-seal-check"></i><b>عقد مكتمل</b><span>عقد #2418 · من الطلب حتى الوصول · بيانات تجريبية</span>
+        </div></div>
+      </figure>
+      <div class="lj-copy">
+        <p class="lj-eyebrow">الخطوة التالية</p>
+        <h2 id="lj-h2c" class="lj-h">جاهز تطور <em>إدارة شركتك؟</em></h2>
+        <p class="lj-lead">شاهد النظام على بيانات تشبه بيانات مكتبك، في عرض مخصص لفريقك.</p>
+        <div class="lj-ctas"><a class="lj-btn lj-btn--primary" href="#">احجز عرضًا توضيحيًا</a><a class="lj-btn lj-btn--ghost" href="#"><i class="ph ph-chat-circle-dots" aria-hidden="true"></i>تواصل عبر واتساب</a></div>
+      </div>
+    </section>
+
+    <nav class="lj-rail" aria-label="فصول الواجهة"><ol>
+      <li><button type="button" data-go="0" aria-current="step"><span>البداية</span></button></li>
+      <li><button type="button" data-go="1"><span>مراحل العقد</span></button></li>
+      <li><button type="button" data-go="2"><span>المالية</span></button></li>
+      <li><button type="button" data-go="3"><span>ابدأ</span></button></li>
+    </ol></nav>
+    <p class="lj-hint" aria-hidden="true"><i class="ph ph-mouse-scroll"></i>مرّر لتتحرك الشاشة</p>
+  </div>
+</div>
+
+<section class="lj-next" id="after" aria-label="نهاية التجربة">
+  <p><b>نهاية التجربة 02.</b> بقية أقسام الصفحة الرئيسية خارج نطاق هذه التجربة. صور الحاسوب مولّدة بالذكاء الاصطناعي.</p>
+  <a class="lj-btn lj-btn--ghost lj-btn--sm" href="#lj">العودة إلى البداية</a>
+</section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" defer></script>
+<script src="lj.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+/* ==========================================================================
+   ClickERP · Experiment 02 «رحلة الشاشة» (laptop journey)
+   A real (AI-rendered) laptop travels and changes angle with scroll position.
+   Isolated: tokens copied; no shared file loaded. Default = stacked & readable
+   (no JS, reduced motion, narrow/short screens). html.lj-live = sticky stage.
+   ========================================================================== */
+:root {
+  --night: #050C1C; --navy-950: #0E1626; --navy-900: #1B2740; --navy-700: #33466F;
+  --slate-600: #566276; --slate-300: #AEB6C3; --slate-on-dark: #B9C2D0; --paper: #FBFAF7; --sand-50: #F4F2EC;
+  --green-500: #87BF4E; --green-400: #9CCB6A; --green-300: #B4D98F; --green-800: #3B6418; --green-100: #E9F4DE; --blue-100: #E6ECF7; --blue-700: #2B4C8C;
+  --font-display: "Readex Pro", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --font-text: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --head-h: 72px; --edge: max(20px, calc((100vw - 1280px) / 2));
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--night); color: #fff; font: 16px/1.6 var(--font-text); }
+h1, h2, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--green-400); outline-offset: 3px; border-radius: 6px; }
+.lj-skip { position: fixed; z-index: 50; inset-inline-start: 12px; top: -64px; padding: 8px 14px; border-radius: 8px; background: #fff; color: var(--navy-900); text-decoration: none; }
+.lj-skip:focus { top: 12px; }
+.lj-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-block-size: 48px; padding-inline: 22px; border-radius: 12px; font: 600 16px/1 var(--font-display); text-decoration: none; white-space: nowrap; }
+.lj-btn--primary { background: var(--green-500); color: var(--navy-900); }
+.lj-btn--ghost { border: 1.5px solid currentColor; }
+.lj-btn--sm { min-block-size: 40px; padding-inline: 16px; font-size: 14px; }
+.lj-head { position: fixed; z-index: 30; inset-inline: 0; top: 0; display: flex; align-items: center; gap: 14px; block-size: var(--head-h); padding-inline: var(--edge); }
+.lj-logo { flex: none; inline-size: 128px; block-size: 56px; }
+.lj-logo img { inline-size: 100%; block-size: 100%; object-fit: contain; }
+.lj-badge { padding: 3px 10px; border: 1px solid currentColor; border-radius: 999px; font-size: 12px; opacity: .7; white-space: nowrap; }
+.lj-head__cta { margin-inline-start: auto; }
+
+/* ---------- the shot: photo + projected screen ---------- */
+.lj-shot { position: relative; aspect-ratio: 3 / 2; inline-size: 100%; }
+.lj-shot img { display: block; inline-size: 100%; block-size: 100%;
+  -webkit-mask-image: radial-gradient(ellipse 58% 62% at 50% 50%, #000 68%, transparent 100%); mask-image: radial-gradient(ellipse 58% 62% at 50% 50%, #000 68%, transparent 100%); }
+.lj-screen { position: absolute; left: 0; top: 0; inline-size: 720px; block-size: 450px; transform-origin: 0 0; overflow: hidden; background: #F3F5F8; visibility: hidden; direction: rtl; }
+.lj-ready .lj-screen { visibility: visible; }
+.lj-screen::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 36%); pointer-events: none; }
+
+/* ---------- app UI on the screen (design px, 720 × 450) ---------- */
+.ui { display: flex; block-size: 100%; color: var(--navy-900); font-family: var(--font-text); }
+.ui-side { flex: none; display: flex; flex-direction: column; align-items: center; gap: 20px; inline-size: 58px; padding-block: 16px; background: var(--navy-950); color: rgba(255, 255, 255, .4); font-size: 21px; }
+.ui-side b { inline-size: 30px; block-size: 30px; margin-block-end: 6px; border: 7px solid #fff; border-inline-start-color: transparent; border-radius: 50%; transform: rotate(-45deg); }
+.ui-side .on { color: var(--green-400); }
+.ui-main { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; gap: 14px; padding: 18px 22px; }
+.ui-title { display: flex; align-items: center; gap: 10px; font: 600 19px/1.3 var(--font-display); }
+.ui-title span { padding: 2px 9px; border-radius: 999px; background: #E3E7EE; font: 500 10.5px/1.6 var(--font-text); color: var(--slate-600); }
+.ui-status { margin-inline-start: auto; padding: 3px 12px; border-radius: 999px; background: var(--blue-100); color: var(--blue-700); font: 600 12px/1.6 var(--font-text); font-style: normal; }
+.ui-status.done { background: var(--green-100); color: var(--green-800); }
+.ui-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.ui-kpis div { display: flex; flex-direction: column; padding: 12px 14px; border: 1px solid #DDE3EA; border-radius: 12px; background: #fff; }
+.ui-kpis small { font-size: 11.5px; color: var(--slate-600); }
+.ui-kpis b { font: 600 28px/1.2 var(--font-display); }
+.ui-rows { display: flex; flex-direction: column; gap: 8px; }
+.ui-rows li { display: flex; align-items: center; gap: 12px; padding: 9px 14px; border-radius: 10px; background: #fff; font-size: 13px; }
+.ui-rows b { font-family: var(--font-display); }
+.ui-rows span { color: var(--slate-600); }
+.ui-rows em { margin-inline-start: auto; padding: 2px 10px; border-radius: 999px; background: var(--blue-100); color: var(--blue-700); font: 600 11px/1.6 var(--font-text); }
+.ui-rows em.g { background: var(--green-100); color: var(--green-800); }
+.ui-rows--check li { gap: 10px; }
+.ui-rows--check .ph-fill { font-size: 19px; color: #5E9A2E; }
+.ui-track { position: relative; padding: 44px 0 6px; }
+.ui-track__line, .ui-track__fill { position: absolute; top: 51px; block-size: 4px; border-radius: 2px; }
+.ui-track__line { inset-inline: 6.25%; background: #DDE3EA; }
+.ui-track__fill { inset-inline-start: 6.25%; inline-size: calc(var(--t) * 12.5%); background: var(--green-500); }
+.ui-track ol { position: relative; display: grid; grid-template-columns: repeat(8, 1fr); }
+.ui-track li { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 11.5px; color: var(--slate-600); white-space: nowrap; }
+.ui-track li::before { content: ""; inline-size: 18px; block-size: 18px; border: 3px solid #C9D0DA; border-radius: 50%; background: #fff; }
+.ui-track li.is-done::before { border-color: var(--green-500); background: var(--green-500); }
+.ui-track li.is-cur { color: var(--navy-900); font-weight: 600; }
+.ui-track li.is-cur::before { border-color: var(--navy-900); }
+.ui-token { position: absolute; top: 4px; inset-inline-start: calc((var(--t) + .5) * 12.5% - 36px); inline-size: 72px; padding: 3px 0; border-radius: 999px; background: var(--navy-900); color: #fff; font: 600 13px/1.6 var(--font-display); text-align: center; box-shadow: 0 8px 16px -8px rgba(14, 22, 38, .6); }
+.ui-token::after { content: ""; position: absolute; left: 50%; bottom: -5px; margin-left: -5px; border: 5px solid transparent; border-bottom: 0; border-top-color: var(--navy-900); }
+.ui-fin { display: grid; grid-template-columns: 1fr 1.35fr; gap: 14px; flex: 1; }
+.ui-inv { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 18px; border: 1px solid #DDE3EA; border-radius: 14px; background: #fff; }
+.ui-inv > small { font-size: 12px; color: var(--slate-600); }
+.ui-inv b { font: 600 32px/1.2 var(--font-display); }
+.ui-inv b small { font-size: 14px; }
+.ui-inv em { align-self: flex-start; padding: 2px 12px; border-radius: 999px; background: var(--green-100); color: var(--green-800); font: 600 12px/1.6 var(--font-text); }
+.ui-bars { display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: 18px; border: 1px solid #DDE3EA; border-radius: 14px; background: #fff; }
+.ui-bars li { display: grid; grid-template-columns: 52px 1fr 26px; align-items: center; gap: 10px; font-size: 13px; }
+.ui-bars i { display: block; block-size: 12px; border-radius: 6px; background: var(--navy-700); transform-origin: 100% 50%; transform: scaleX(calc(var(--w) * var(--g, 1))); }
+.ui-bars b { font-family: var(--font-display); text-align: end; }
+.ui--done { flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; }
+.ui--done .ph-fill { font-size: 96px; color: var(--green-500); }
+.ui--done b { font: 600 34px/1.2 var(--font-display); }
+.ui--done span { font-size: 14px; color: var(--slate-600); }
+
+/* ---------- copy ---------- */
+.lj-eyebrow { display: inline-flex; align-items: center; gap: 10px; font: 500 15px/1.5 var(--font-text); color: var(--green-300); }
+.lj-eyebrow::before { content: ""; inline-size: 28px; block-size: 2px; border-radius: 2px; background: var(--green-500); }
+.lj-eyebrow span { padding: 0 9px; border: 1px solid rgba(180, 217, 143, .5); border-radius: 999px; font: 600 12px/1.8 var(--font-display); }
+.lj-h { margin-block-start: 14px; font: 600 clamp(1.9rem, 1.1rem + 2.5vw, 3.4rem)/1.18 var(--font-display); text-wrap: balance; }
+.lj-h--1 { font-size: clamp(2.3rem, 1rem + 3.2vw, 4.3rem); line-height: 1.14; }
+.lj-h em { display: block; font-style: normal; color: var(--green-400); }
+.lj-lead { max-inline-size: 40ch; margin-block-start: 16px; font-size: clamp(1rem, .9rem + .4vw, 1.2rem); line-height: 1.8; color: var(--slate-on-dark); }
+.lj-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-block-start: 26px; }
+.lj-points { display: flex; flex-direction: column; gap: 12px; }
+.lj-points li { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 14px; background: rgba(255, 255, 255, .05); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .09); font-size: 15px; }
+.lj-points .ph { font-size: 22px; color: var(--green-400); }
+
+/* ==========================================================================
+   STATIC (default): stacked chapters
+   ========================================================================== */
+.lj-bg, .lj-rail, .lj-hint, .lj-chips { display: none; }
+.lj-stage { padding-block-start: var(--head-h); background: radial-gradient(80% 40% at 50% 0%, rgba(51, 70, 111, .35), transparent 70%), var(--night); }
+.lj-ch { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; align-items: center; max-inline-size: 1180px; margin-inline: auto; padding: 40px var(--edge); }
+.lj-ch .lj-shot { max-inline-size: 760px; margin-inline: auto; }
+.lj-ch .lj-points { margin-block-start: 18px; }
+@media (min-width: 900px) {
+  .lj-ch { grid-template-columns: 1fr 1.25fr; gap: 32px; padding-block: 64px; }
+  .lj-ch .lj-shot { grid-row: 1 / span 2; grid-column: 2; }
+  .lj-ch .lj-copy { grid-column: 1; align-self: end; }
+  .lj-ch .lj-points { grid-column: 1; align-self: start; }
+  .lj-ch:not(:has(.lj-points)) .lj-copy { grid-row: 1 / span 2; align-self: center; }
+}
+.lj-next { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px; padding: 64px var(--edge) 96px; background: var(--paper); color: var(--slate-600); text-align: center; }
+.lj-next b { color: var(--navy-900); }
+.lj-next .lj-btn { color: var(--navy-900); }
+
+/* ==========================================================================
+   LIVE: sticky stage, state = f(scroll)
+   ========================================================================== */
+.lj-live .lj { block-size: 420vh; }
+.lj-live .lj-stage { position: sticky; top: 0; block-size: 100vh; block-size: 100svh; padding: 0; overflow: hidden; background: var(--night); isolation: isolate; }
+.lj-live .lj-bg { display: block; position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.lj-glow { position: absolute; left: 0; top: 0; border-radius: 50%; will-change: transform; }
+.lj-glow--a { inline-size: 1100px; block-size: 1100px; margin: -550px 0 0 -550px; background: radial-gradient(closest-side, rgba(86, 128, 230, .62), rgba(58, 92, 190, .26) 42%, transparent 74%); }
+.lj-glow--b { inline-size: 760px; block-size: 760px; margin: -380px 0 0 -380px; background: radial-gradient(closest-side, rgba(135, 191, 78, .26), rgba(135, 191, 78, .07) 50%, transparent 72%); }
+.lj-floor { position: absolute; inset-inline: -30%; bottom: 0; block-size: 46%; transform-origin: 50% 100%; transform: perspective(700px) rotateX(64deg);
+  background-image: linear-gradient(rgba(140, 170, 230, .3) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 170, 230, .3) 1px, transparent 1px); background-size: 80px 80px;
+  -webkit-mask-image: linear-gradient(to top, #000, transparent 85%); mask-image: linear-gradient(to top, #000, transparent 85%); }
+.lj-orbit { position: absolute; left: 0; top: 0; inline-size: 1000px; block-size: 1000px; margin: -500px 0 0 -500px; fill: none; stroke: rgba(160, 190, 255, .2); stroke-width: 1.3; will-change: transform; }
+.lj-orbit circle:nth-child(3) { stroke: rgba(135, 191, 78, .4); stroke-width: 1.6; }
+.lj-words { position: absolute; inset: 0; }
+.lj-words span { position: absolute; left: 50%; top: 50%; font: 700 clamp(9rem, 22vw, 22rem)/1 var(--font-display); white-space: nowrap; color: transparent; -webkit-text-stroke: 1.5px rgba(160, 190, 255, .55); opacity: 0; will-change: transform, opacity; }
+.lj-live .lj-ch { position: absolute; inset: 0; display: block; max-inline-size: none; margin: 0; padding: 0; pointer-events: none; }
+.lj-live .lj-shot { position: absolute; z-index: 2; left: 0; top: 0; inline-size: var(--wd); max-inline-size: none; margin: 0; mix-blend-mode: lighten; will-change: transform, opacity; opacity: 0; }
+.lj-live .lj-ch[data-ch="0"] .lj-shot { opacity: 1; }
+.lj-live .lj-copy, .lj-live .lj-points { position: absolute; z-index: 3; opacity: 0; will-change: transform, opacity; }
+.lj-live .lj-ch[data-ch="0"] .lj-copy { opacity: 1; }
+.lj-live .lj-copy.is-on, .lj-live .lj-points.is-on { pointer-events: auto; }
+.lj-live [data-side="start"] .lj-copy { inset-inline-start: var(--edge); top: 50%; inline-size: min(calc(50vw - var(--edge) - 24px), 600px); margin-block-start: -4vh; translate: 0 -50%; }
+.lj-live [data-side="end"] .lj-copy { inset-inline-end: calc(var(--edge) + 36px); top: 50%; inline-size: min(calc(46vw - var(--edge) - 36px), 520px); translate: 0 -50%; }
+.lj-live [data-side="split"] .lj-copy { inset-inline-start: var(--edge); top: 50%; inline-size: min(calc(27vw - var(--edge) + 40px), 380px); translate: 0 -50%; }
+.lj-live [data-side="split"] .lj-h { font-size: clamp(1.6rem, .9rem + 1.7vw, 2.5rem); }
+.lj-live [data-side="split"] .lj-points { inset-inline-end: calc(var(--edge) + 36px); top: 50%; inline-size: min(calc(25vw - var(--edge)), 300px); translate: 0 -50%; }
+.lj-live [data-side="top"] .lj-copy { inset-inline: 0; top: calc(var(--head-h) + clamp(8px, 3vh, 36px)); inline-size: min(820px, 84vw); margin-inline: auto; text-align: center; }
+.lj-live [data-side="top"] .lj-h { font-size: clamp(1.8rem, 1rem + 2.2vw, 3rem); margin-block-start: 8px; }
+.lj-live [data-side="top"] .lj-h em { display: inline; }
+.lj-live [data-side="top"] .lj-lead { margin: 8px auto 0; }
+.lj-live [data-side="top"] .lj-ctas { justify-content: center; margin-block-start: 16px; }
+/* hero chips wired to the laptop */
+.lj-live .lj-chips { display: block; position: absolute; z-index: 4; left: 0; top: 0; inline-size: var(--wd); aspect-ratio: 3 / 2; will-change: transform, opacity; }
+.lj-chips li { position: absolute; left: calc(50% + var(--x)); top: calc(50% + var(--y)); display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; translate: -50% -50%;
+  background: rgba(20, 32, 58, .82); box-shadow: inset 0 0 0 1px rgba(160, 190, 255, .28), 0 14px 28px -16px #000; font: 500 14px/1.4 var(--font-text); white-space: nowrap; animation: lj-float 5s ease-in-out infinite; }
+.lj-chips li:nth-child(2n) { animation-delay: -2.4s; }
+.lj-chips .ph { font-size: 18px; color: var(--green-400); }
+.lj-chips li::after { content: ""; position: absolute; top: 50%; inline-size: 7px; block-size: 7px; margin-top: -3.5px; border-radius: 50%; background: var(--green-500); box-shadow: 0 0 0 4px rgba(135, 191, 78, .2); }
+.lj-chips li:nth-child(-n+2)::after { right: -3px; }
+.lj-chips li:nth-child(n+3)::after { left: -3px; }
+@keyframes lj-float { 50% { transform: translateY(-7px); } }
+/* rail + hint */
+.lj-live .lj-rail { display: block; position: absolute; z-index: 6; inset-inline-end: 18px; top: 50%; transform: translateY(-50%); }
+.lj-rail ol { display: flex; flex-direction: column; gap: 6px; }
+.lj-rail button { position: relative; display: grid; place-items: center; inline-size: 28px; block-size: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+.lj-rail button::before { content: ""; inline-size: 6px; block-size: 6px; border-radius: 3px; background: rgba(255, 255, 255, .35); transition: block-size .25s, background-color .25s; }
+.lj-rail button[aria-current="step"]::before { block-size: 22px; background: var(--green-500); }
+.lj-rail button span { position: absolute; inset-inline-end: 34px; top: 50%; transform: translateY(-50%); padding: 3px 9px; border-radius: 6px; background: rgba(20, 32, 58, .92); font-size: 12px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; }
+.lj-rail button:hover span, .lj-rail button:focus-visible span { opacity: 1; }
+.lj-live .lj-hint { display: flex; position: absolute; z-index: 5; left: 50%; bottom: 20px; transform: translateX(-50%); align-items: center; gap: 8px; font-size: 13px; color: var(--slate-on-dark); white-space: nowrap; }
+.lj-hint .ph { font-size: 18px; }
+
+@media (max-width: 899px) {
+  :root { --head-h: 64px; }
+  .lj-logo { inline-size: 104px; block-size: 46px; }
+  .lj-badge { display: none; }
+  .lj-ctas .lj-btn { flex: 1 1 0; padding-inline: 12px; font-size: 15px; }
+  .lj-ch .lj-shot { inline-size: 116%; margin-inline: -8%; }
+}
+@media (prefers-reduced-motion: reduce) { .lj-chips li { animation: none; } }
+html:not(.lj-live) .lj-head { background: rgba(5, 12, 28, .92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
