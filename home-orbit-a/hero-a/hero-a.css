@@ -1,0 +1,256 @@
+/* ==========================================================================
+   ClickERP · Hero, Direction A «المدار» (approved 2026-11-16)
+   Static 5-scene storyboard. Scenes are stacked full-height sections; this
+   is also the no-JS / reduced-motion end state. GSAP comes in Phase 6.
+   ========================================================================== */
+
+body { background: #0B1220; color: var(--white); }
+.ad-header { color: var(--white); }
+.defs { position: absolute; inline-size: 0; block-size: 0; overflow: hidden; }
+
+/* ---------- Scene shell ------------------------------------------------- */
+.sc {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-block-size: max(100svh, 780px);
+  background: linear-gradient(180deg, #0E1626 0%, #0B1220 100%);
+}
+.sc::after { /* static film grain */
+  content: ""; position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.sc::before { /* vignette */
+  content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(4, 8, 16, .6) 100%);
+}
+.sc__wrap {
+  position: relative; z-index: 6; max-inline-size: 1440px; margin-inline: auto;
+  padding-inline: clamp(16px, 2.8vw, 40px);
+}
+.sc svg { overflow: visible; }
+
+/* ---------- Shared type ------------------------------------------------- */
+.eyebrow { display: inline-flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 500; color: var(--slate-on-dark); }
+.eyebrow::before { content: ""; inline-size: 36px; block-size: 1px; background: var(--green-500); }
+.eyebrow b { font-family: var(--font-display); font-weight: 500; color: var(--green-500); }
+.title {
+  font-family: var(--font-display); font-weight: 700; letter-spacing: 0;
+  font-size: clamp(40px, 5.2vw, 78px); line-height: 1.1; margin-block: 22px;
+}
+.title--xl { font-size: clamp(46px, 6vw, 90px); line-height: 1.06; }
+.title span { display: block; }
+.title em { font-style: normal; color: var(--green-500); text-shadow: 0 0 60px rgba(135, 191, 78, .3); }
+.lead { font-size: clamp(16px, 1.3vw, 19px); color: var(--slate-on-dark); line-height: 1.85; max-inline-size: 32em; }
+.ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-block-start: 36px; }
+
+/* chips orbiting / standing in the scenes */
+.chip {
+  position: absolute; transform: translate(-50%, -50%);
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 9px 16px 9px 14px; border-radius: 999px;
+  background: rgba(27, 39, 64, .8); border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow: 0 14px 30px -12px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .08);
+  backdrop-filter: blur(6px);
+  font-size: 14px; font-weight: 500; white-space: nowrap; color: #EEF1F6;
+}
+.chip i { inline-size: 8px; block-size: 8px; border-radius: 50%; background: var(--slate-300); flex: none; }
+.chip b { font-family: var(--font-display); font-weight: 400; font-size: 11px; color: var(--slate-300); }
+.chip--back { opacity: .5; transform: translate(-50%, -50%) scale(.86); filter: blur(.4px); }
+.chip--live { border-color: rgba(135, 191, 78, .45); }
+.chip--live i { background: var(--green-500); box-shadow: 0 0 0 4px rgba(135, 191, 78, .22); }
+.chip--warn { background: rgba(14, 22, 38, .55); border-style: dashed; border-color: rgba(185, 194, 208, .3); color: var(--slate-on-dark); }
+.chip--warn i { background: #D9932B; }
+.chip--pending i { background: #F5C77A; }
+.chip small { font-size: 11px; color: #F5C77A; }
+
+/* light product-hint card */
+.proof {
+  position: absolute; inline-size: 236px; padding: 14px 16px; border-radius: 12px;
+  background: rgba(251, 250, 247, .97); color: var(--navy-900);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .7); font-size: 13px; line-height: 1.5;
+}
+.proof__row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.proof__id { font-weight: 600; font-variant-numeric: tabular-nums; }
+.proof__demo { font-size: 10px; color: var(--slate-600); background: var(--sand-100); padding: 2px 6px; border-radius: 4px; }
+.proof__status { margin-block-start: 8px; display: flex; align-items: center; gap: 8px; color: var(--green-800); font-weight: 600; }
+.proof__status::before { content: ""; inline-size: 18px; block-size: 18px; border-radius: 50%; flex: none; background: var(--green-100) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233B6418' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat; }
+.proof__bar { margin-block-start: 10px; block-size: 4px; border-radius: 4px; background: var(--slate-200); overflow: hidden; }
+.proof__bar::after { content: ""; display: block; block-size: 100%; inline-size: 62%; margin-inline-start: auto; background: var(--green-500); }
+
+/* chapter rail (static marker of the 5-scene story) */
+.rail { position: absolute; z-index: 7; inset-block-end: 0; inset-inline: 0; border-block-start: 1px solid rgba(255, 255, 255, .08); }
+.rail__inner {
+  max-inline-size: 1440px; margin-inline: auto; padding: 18px clamp(16px, 2.8vw, 40px);
+  display: flex; align-items: center; gap: 36px; font-size: 13px; color: rgba(185, 194, 208, .6);
+}
+.rail__item { display: flex; gap: 10px; align-items: baseline; }
+.rail__item b { font-family: var(--font-display); font-weight: 500; font-variant-numeric: tabular-nums; }
+.rail__item.is-active { color: var(--white); }
+.rail__item.is-active b { color: var(--green-500); }
+.rail__cue { margin-inline-start: auto; display: flex; align-items: center; gap: 10px; color: var(--slate-on-dark); }
+.rail__cue span { inline-size: 1px; block-size: 22px; background: linear-gradient(var(--green-500), transparent); }
+
+/* =========================================================================
+   S1 · Brand statement (the approved Scene 1)
+   ========================================================================= */
+.s1 { background:
+  radial-gradient(70vw 60vh at 88% -8%, rgba(64, 86, 136, .55), transparent 62%),
+  radial-gradient(50vw 50vh at 30% 60%, rgba(36, 52, 90, .55), transparent 70%),
+  linear-gradient(180deg, #0E1626 0%, #0B1220 100%); }
+.s1 .sc__wrap { min-block-size: inherit; padding-block: 120px 96px; display: grid; grid-template-columns: minmax(0, 5.4fr) minmax(0, 6.6fr); align-items: center; }
+.s1__copy { max-inline-size: 600px; }
+.s1__visual { position: absolute; z-index: 1; inset-inline-end: 0; inset-block-start: 50%; inline-size: min(61vw, 920px); aspect-ratio: 1; transform: translateY(-46%); }
+.s1__visual > svg { inline-size: 100%; block-size: 100%; }
+.s1 .proof { left: 55%; top: 80%; }
+
+/* =========================================================================
+   S2 · Business transformation: tangled orbits → calm rings
+   ========================================================================= */
+.s2 { background:
+  radial-gradient(60vw 50vh at 85% 70%, rgba(154, 74, 6, .10), transparent 70%),
+  radial-gradient(60vw 60vh at 15% 70%, rgba(135, 191, 78, .08), transparent 70%),
+  linear-gradient(180deg, #0B1220 0%, #0E1626 100%); }
+.s2 .sc__wrap { padding-block: 104px 88px; }
+.s2__top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 72px); align-items: end; }
+.s2__top .lead { padding-block-end: 22px; }
+.s2__stage { display: grid; grid-template-columns: minmax(0, 1fr) 140px minmax(0, 1fr); align-items: center; margin-block-start: 12px; }
+.s2__panel { position: relative; aspect-ratio: 640 / 440; }
+.s2__panel > svg { inline-size: 100%; block-size: 100%; }
+.s2__label { position: absolute; inset-block-start: -4px; inset-inline-start: 0; font-size: 12px; font-weight: 600; letter-spacing: 0; color: var(--slate-300); }
+.s2__label--calm { color: var(--green-400); }
+.s2__seam { display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 13px; font-weight: 600; color: var(--white); }
+.s2__seam::before, .s2__seam::after { content: ""; inline-size: 1px; block-size: 110px; background: linear-gradient(transparent, rgba(135, 191, 78, .7), transparent); }
+.s2__seam span { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: var(--green-500); color: var(--navy-950); }
+.s2__seam svg { inline-size: 16px; block-size: 16px; }
+.s2 .chip--warn { transform: translate(-50%, -50%) rotate(var(--r, 0deg)); }
+
+/* =========================================================================
+   S3 · Connected business: departments on one ring
+   ========================================================================= */
+.s3 { background:
+  radial-gradient(50vw 45vh at 50% 70%, rgba(51, 70, 111, .55), transparent 70%),
+  linear-gradient(180deg, #0E1626 0%, #0B1220 100%); }
+.s3 .sc__wrap { padding-block: 104px 80px; text-align: center; }
+.s3 .eyebrow { justify-content: center; }
+.s3 .lead { margin-inline: auto; }
+.s3 .title { font-size: clamp(36px, 4.4vw, 66px); margin-block: 16px; }
+.s3__hub { position: relative; inline-size: min(92vw, 1040px, calc((100svh - 450px) * 1.852)); aspect-ratio: 1000 / 540; margin: 4px auto 0; }
+.s3__hub > svg { inline-size: 100%; block-size: 100%; }
+.dept {
+  position: absolute; transform: translate(-50%, -50%); text-align: center;
+  padding: 10px 18px; border-radius: 14px; min-inline-size: 150px;
+  background: rgba(27, 39, 64, .85); border: 1px solid rgba(135, 191, 78, .35);
+  box-shadow: 0 16px 34px -14px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .08);
+  backdrop-filter: blur(6px);
+}
+.dept strong { display: block; font-family: var(--font-display); font-weight: 600; font-size: 15px; color: var(--white); }
+.dept span { display: block; font-size: 12px; color: var(--slate-on-dark); }
+.dept--back { opacity: .72; transform: translate(-50%, -50%) scale(.9); }
+
+/* =========================================================================
+   S4 · Saudi specialisation: the mark on a dawn horizon
+   ========================================================================= */
+.s4 { background:
+  radial-gradient(80vw 30vh at 40% 58%, rgba(201, 185, 154, .30), transparent 70%),
+  radial-gradient(60vw 25vh at 40% 60%, rgba(217, 147, 43, .16), transparent 70%),
+  linear-gradient(180deg, #0B1220 0%, #16213A 52%, #0A101C 64%, #070C16 100%); }
+.s4 .sc__wrap { padding-block: 104px 0; }
+.s4__copy { max-inline-size: 780px; }
+.s4__copy .lead { max-inline-size: 40em; }
+.s4__land { position: absolute; z-index: 1; inset-inline: 0; inset-block-end: -70px; }
+.s4__land-in { position: relative; max-inline-size: 1600px; margin-inline: auto; aspect-ratio: 1440 / 520; }
+.s4__land-in > svg { inline-size: 100%; block-size: 100%; }
+.s4 .chip { font-size: 13px; }
+.s4__list { display: none; flex-wrap: wrap; gap: 8px; margin-block-start: 20px; }
+.s4__list .chip { position: static; transform: none; }
+.s4__note { position: absolute; z-index: 7; inset-block-end: 70px; inset-inline-start: clamp(16px, 2.8vw, 40px); font-size: 12px; color: #F5C77A; }
+
+/* =========================================================================
+   S5 · Conversion: the arrow clicks the demo button
+   ========================================================================= */
+.s5 { background:
+  radial-gradient(60vw 50vh at 50% 62%, rgba(135, 191, 78, .10), transparent 70%),
+  linear-gradient(180deg, #0B1220 0%, #0E1626 100%); }
+.s5 .sc__wrap { min-block-size: inherit; padding-block: 120px 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.s5 .eyebrow { justify-content: center; }
+.s5 .lead { margin-inline: auto; }
+.s5 .ctas { justify-content: center; margin-block-start: 44px; }
+.s5__primary { position: relative; display: inline-flex; }
+.s5__anchor { position: absolute; inset-block-start: 100%; left: 100%; inline-size: 0; block-size: 0; }
+.s5__ripples, .s5__arrow { max-inline-size: none; }
+.s5__ripples { position: absolute; z-index: -1; left: -900px; top: -900px; inline-size: 1800px; block-size: 1800px; pointer-events: none; }
+.s5__arrow { position: absolute; left: -16px; top: -16px; inline-size: 150px; block-size: 150px; filter: drop-shadow(-10px 22px 22px rgba(0, 0, 0, .55)); }
+.s5__assure { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px; margin-block-start: 160px; font-size: 14px; color: var(--slate-on-dark); }
+.s5__assure span { display: inline-flex; align-items: center; gap: 8px; }
+.s5__assure span::before { content: ""; inline-size: 6px; block-size: 6px; border-radius: 50%; background: var(--green-500); }
+
+/* after the hero: where the product showcase begins (light editorial site) */
+.next {
+  background: var(--paper); color: var(--navy-900);
+  padding: 56px clamp(16px, 2.8vw, 40px); text-align: center;
+}
+.next p { max-inline-size: 44em; margin-inline: auto; color: var(--slate-700); }
+.next b { display: block; font-family: var(--font-display); font-size: 22px; color: var(--navy-900); margin-block-end: 6px; }
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+@media (max-width: 1100px) {
+  .sc { min-block-size: 0; padding-block-end: 64px; }
+  .rail__item:not(.is-active) { display: none; }
+  .s1 .sc__wrap { grid-template-columns: 1fr; padding-block: 112px 24px; min-block-size: 0; }
+  .s1__visual { position: relative; inset: auto; transform: none; margin-inline: -18vw; inline-size: auto; }
+  .s2__top { grid-template-columns: 1fr; }
+  .s2__stage { grid-template-columns: 1fr; gap: 8px; }
+  .s2__seam { flex-direction: row; }
+  .s2__seam::before, .s2__seam::after { inline-size: 60px; block-size: 1px; background: linear-gradient(90deg, transparent, rgba(135, 191, 78, .7), transparent); }
+  .s2__seam svg { transform: rotate(-90deg); }
+  .s4 .sc__wrap { padding-block-end: 0; }
+  .s4__land { position: relative; margin-inline: -30vw; }
+  .s4__note { position: static; padding-inline: clamp(16px, 2.8vw, 40px); }
+  .s5 .sc__wrap { min-block-size: 0; }
+}
+@media (max-width: 640px) {
+  .title, .title--xl { font-size: clamp(36px, 11.4vw, 52px); }
+  .lead { font-size: 16px; }
+  .ctas { flex-direction: column; inline-size: 100%; }
+  .ctas .ad-btn, .s5__primary, .s5__primary .ad-btn { inline-size: 100%; }
+  .chip { font-size: 11px; padding: 6px 10px; gap: 6px; }
+  .chip b { display: none; }
+  .chip--back { display: none; }
+  .s1__visual { margin-inline: -42vw; }
+  .s1 .proof { left: 46%; top: 77%; inline-size: 180px; font-size: 11px; padding: 10px 12px; }
+  .s2 .chip--warn:nth-of-type(n+5) { display: none; }
+  .s3__hub { inline-size: 100%; margin-block-start: 24px; }
+  .dept { min-inline-size: 0; padding: 5px 8px; border-radius: 10px; }
+  .dept strong { font-size: 11px; }
+  .dept span { display: none; }
+  .s4__land { margin-inline: -10vw; }
+  .s4 .chip { display: none; }
+  .s4__list { display: flex; }
+  .s4 .s4__list .chip { display: inline-flex; }
+  .s5__anchor { left: 80%; }
+  .s5__arrow { inline-size: 72px; block-size: 72px; left: -30px; top: -6px; }
+  .s5 .ctas { gap: 72px; }
+  .s5__assure { margin-block-start: 90px; flex-direction: column; align-items: center; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* =========================================================================
+   Phase 6 · GSAP cinema mode (added by hero-a.js only on large screens
+   with motion allowed). Without JS, or under reduced motion, none of
+   this applies and the stacked storyboard above is the experience.
+   ========================================================================= */
+.hero { position: relative; }
+.actor { display: none; }
+.hero.is-pinned { block-size: 100vh; overflow: hidden; }
+.hero.is-pinned .sc { position: absolute; inset: 0; min-block-size: 100%; pointer-events: none; }
+.hero.is-pinned .sc.is-current { pointer-events: auto; }
+.hero.is-pinned .actor {
+  display: block; position: absolute; inset-block-start: 0; left: 0; z-index: 8;
+  inline-size: 1000px; block-size: 1000px; max-inline-size: none;
+  transform-origin: 0 0; opacity: 0; pointer-events: none; will-change: transform, opacity;
+}
+.hero.is-pinned .rail__item { cursor: pointer; pointer-events: auto; }
+.hero.is-pinned .rail__item:hover { color: var(--white); }
+.ad-header.is-fixed { position: fixed; transition: background-color .3s ease, box-shadow .3s ease; }
+.ad-header.is-solid { background: rgba(14, 22, 38, .94); box-shadow: 0 1px 0 rgba(255, 255, 255, .06); backdrop-filter: blur(8px); }

@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>نظام كليك · الصفحة الرئيسية (الواجهة «المدار» + الاتجاه A «المسار الأخضر»)</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@300..700&display=swap">
+  <!-- Hero «المدار» (prototype/hero-a/) is reused READ-ONLY: its CSS/JS are linked, its markup copied unchanged. -->
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="art-directions/ad-base.css">
+  <link rel="stylesheet" href="hero-a/hero-a.css">
+  <!-- Phosphor Icons (MIT), exact version -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <!-- Homepage after the hero: Direction A «المسار الأخضر» (owner, 2026-11-17). Own CSS. -->
+  <link rel="stylesheet" href="css/home-a-app.css">
+  <link rel="stylesheet" href="css/home-orbit.css">
+</head>
+<body>
+  <a class="ad-skip" href="#after-hero">تخطَّ المقدمة</a>
+
+  <!-- ===== Shared artwork: the persistent object of the whole hero ===== -->
+  <svg class="defs" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="aC" d="M748.7 667.8 A300 300 0 1 1 729.8 307.2 L626.4 393.9 A165 165 0 1 0 636.8 592.3Z"/>
+      <path id="aArrow" d="M0 0 L236 74 Q244 77 236 82 L132 118 Q122 122 118 132 L82 236 Q77 244 74 236 Z"/>
+      <linearGradient id="aFace" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3A5185"/><stop offset=".45" stop-color="#22325A"/><stop offset="1" stop-color="#121C33"/>
+      </linearGradient>
+      <linearGradient id="aRim" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".5" stop-color="#fff" stop-opacity=".06"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      </linearGradient>
+      <radialGradient id="aSpec" cx=".72" cy=".2" r=".55">
+        <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="aFloor" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#87BF4E" stop-opacity=".22"/><stop offset=".5" stop-color="#87BF4E" stop-opacity=".06"/><stop offset="1" stop-color="#87BF4E" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="aOrbitFront" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#B9C2D0" stop-opacity=".05"/><stop offset=".5" stop-color="#B9C2D0" stop-opacity=".55"/><stop offset="1" stop-color="#B9C2D0" stop-opacity=".08"/>
+      </linearGradient>
+      <linearGradient id="aOrbitLive" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#87BF4E" stop-opacity="0"/><stop offset=".55" stop-color="#87BF4E" stop-opacity=".95"/><stop offset="1" stop-color="#87BF4E" stop-opacity=".1"/>
+      </linearGradient>
+      <linearGradient id="aRingLive" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#87BF4E" stop-opacity=".25"/><stop offset=".5" stop-color="#9CCB6A" stop-opacity=".95"/><stop offset="1" stop-color="#87BF4E" stop-opacity=".25"/>
+      </linearGradient>
+      <linearGradient id="aHorizon" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#E8D9B8" stop-opacity="0"/><stop offset=".35" stop-color="#E8D9B8" stop-opacity=".7"/><stop offset="1" stop-color="#E8D9B8" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="aReflectFade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/>
+      </linearGradient>
+      <clipPath id="aClipC"><use href="#aC"/></clipPath>
+      <filter id="aBlur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="24"/></filter>
+
+      <!-- the sculpted ClickERP mark (viewBox 1000) -->
+      <symbol id="mk3d" viewBox="0 0 1000 1000" overflow="visible">
+        <use href="#aC" transform="translate(-30 42)" fill="#04070F"/>
+        <use href="#aC" transform="translate(-27 38)" fill="#060B16"/>
+        <use href="#aC" transform="translate(-24 34)" fill="#08101D"/>
+        <use href="#aC" transform="translate(-21 29)" fill="#0A1324"/>
+        <use href="#aC" transform="translate(-18 25)" fill="#0C172B"/>
+        <use href="#aC" transform="translate(-15 21)" fill="#0E1A31"/>
+        <use href="#aC" transform="translate(-12 17)" fill="#101D36"/>
+        <use href="#aC" transform="translate(-9 13)" fill="#13213C"/>
+        <use href="#aC" transform="translate(-6 8)" fill="#162641"/>
+        <use href="#aC" transform="translate(-3 4)" fill="#1A2B48"/>
+        <use href="#aC" fill="url(#aFace)"/>
+        <rect x="150" y="150" width="700" height="700" fill="url(#aSpec)" clip-path="url(#aClipC)"/>
+        <use href="#aC" fill="none" stroke="url(#aRim)" stroke-width="2"/>
+        <g fill="none" stroke-linecap="round">
+          <path d="M593.5 578.4 A122 122 0 1 1 584.7 412.2" stroke="#0A1222" stroke-width="22" transform="translate(-4 6)"/>
+          <path d="M593.5 578.4 A122 122 0 1 1 584.7 412.2" stroke="#C9D1DD" stroke-width="16"/>
+          <path d="M564.3 554.0 A84 84 0 1 1 558.4 439.6" stroke="#0A1222" stroke-width="15" transform="translate(-3 5)"/>
+          <path d="M564.3 554.0 A84 84 0 1 1 558.4 439.6" stroke="#9FAABA" stroke-width="10"/>
+        </g>
+        <g transform="translate(508 508)">
+          <use href="#aArrow" fill="#0B1220" stroke="#0B1220" stroke-width="22" stroke-linejoin="round"/>
+          <use href="#aArrow" transform="translate(-12 18)" fill="#1F3A0B"/>
+          <use href="#aArrow" transform="translate(-8 12)" fill="#2C4F12"/>
+          <use href="#aArrow" transform="translate(-4 6)" fill="#3B6418"/>
+          <path d="M0 0 L236 74 Q244 77 236 82 L132 118 Q122 122 118 132 Z" fill="#A9D67A"/>
+          <path d="M0 0 L118 132 L82 236 Q77 244 74 236 Z" fill="#79B03F"/>
+          <path d="M0 0 L236 74" stroke="#fff" stroke-opacity=".55" stroke-width="2"/>
+        </g>
+      </symbol>
+
+      <!-- the cursor arrow alone (S5) -->
+      <symbol id="arrow3d" viewBox="-20 -20 290 290" overflow="visible">
+        <use href="#aArrow" transform="translate(-12 18)" fill="#1F3A0B"/>
+        <use href="#aArrow" transform="translate(-8 12)" fill="#2C4F12"/>
+        <use href="#aArrow" transform="translate(-4 6)" fill="#3B6418"/>
+        <path d="M0 0 L236 74 Q244 77 236 82 L132 118 Q122 122 118 132 Z" fill="#A9D67A"/>
+        <path d="M0 0 L118 132 L82 236 Q77 244 74 236 Z" fill="#79B03F"/>
+        <path d="M0 0 L236 74" stroke="#fff" stroke-opacity=".6" stroke-width="3"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="ad-header">
+    <div class="ad-header__inner">
+      <a class="ad-header__logo" href="#" aria-label="نظام كليك، الصفحة الرئيسية"><img src="assets/brand/clickerp-logo-white.png" alt="" width="124" height="54"></a>
+      <nav class="ad-nav" aria-label="القائمة الرئيسية">
+        <a href="#">النظام</a><a href="#">الموقع والتطبيقات</a><a href="#">الباقات</a><a href="#">من نحن</a>
+      </nav>
+      <div class="ad-header__actions">
+        <a class="ad-btn ad-btn--ghost-dark ad-btn--sm" href="#">اكتشف النظام</a>
+        <a class="ad-btn ad-btn--primary ad-btn--sm" href="#">احجز عرضًا توضيحيًا</a>
+      </div>
+      <button class="ad-menu" type="button" aria-label="فتح القائمة">القائمة</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero" id="hero">
+    <!-- ================================================================
+         S1 · Brand statement
+         ================================================================ -->
+    <section class="sc s1" id="scene-1" aria-labelledby="s1-title">
+      <div class="sc__wrap">
+        <div class="s1__copy">
+          <p class="eyebrow">نظام كليك لإدارة مكاتب وشركات الاستقدام</p>
+          <h1 class="title title--xl" id="s1-title">
+            <span>كل أعمال</span><span>الاستقدام</span><span>في نظام <em>واحد</em></span>
+          </h1>
+          <p class="lead">الطلبات والسير الذاتية والعقود والمالية والعملاء، في منصة سعودية واحدة مبنية من داخل القطاع.</p>
+          <div class="ctas">
+            <a class="ad-btn ad-btn--primary ad-btn--lg" href="#scene-5">احجز عرضًا توضيحيًا</a>
+            <a class="ad-btn ad-btn--ghost-dark ad-btn--lg" href="#after-hero">اكتشف النظام</a>
+          </div>
+          <p class="u-vh">وصف المشهد: علامة نظام كليك مجسّمة في المركز، وحولها مدارات تدور عليها أعمال مكتب الاستقدام: طلبات العملاء، السير الذاتية، العقود، التأشيرات، السفر والوصول، المالية والفوترة، خدمة العملاء، المكاتب الخارجية. البيانات المعروضة تجريبية.</p>
+        </div>
+      </div>
+
+      <div class="s1__visual" aria-hidden="true">
+        <svg viewBox="0 0 1000 1000">
+          <g fill="none" stroke="#fff" stroke-opacity=".035">
+            <circle cx="500" cy="500" r="380"/><circle cx="500" cy="500" r="460"/><circle cx="500" cy="500" r="550"/>
+            <circle cx="500" cy="500" r="650"/><circle cx="500" cy="500" r="760"/><circle cx="500" cy="500" r="880"/>
+            <circle cx="500" cy="500" r="1010"/><circle cx="500" cy="500" r="1150"/>
+          </g>
+          <ellipse cx="500" cy="860" rx="420" ry="70" fill="url(#aFloor)"/>
+          <ellipse cx="470" cy="842" rx="250" ry="26" fill="#02050B" opacity=".55" filter="url(#aBlur)"/>
+          <g fill="none" stroke="#B9C2D0" stroke-opacity=".16" stroke-width="1.4">
+            <g class="ob" data-o="-16"><g transform="translate(500 500) rotate(-16)"><path d="M-470 0 A470 128 0 0 1 470 0" pathLength="1"/></g></g>
+            <g class="ob" data-o="13"><g transform="translate(500 500) rotate(13)"><path d="M-400 0 A400 168 0 0 1 400 0" pathLength="1"/></g></g>
+            <g class="ob" data-o="-3"><g transform="translate(500 500) rotate(-3)"><path d="M-455 0 A455 62 0 0 1 455 0" pathLength="1"/></g></g>
+          </g>
+          <use class="mark" href="#mk3d" width="1000" height="1000"/>
+          <rect class="mark-box" x="0" y="0" width="1000" height="1000" fill="none"/>
+          <g fill="none" stroke-width="1.6">
+            <g class="ob" data-o="-16"><g transform="translate(500 500) rotate(-16)"><path d="M-470 0 A470 128 0 0 0 470 0" pathLength="1" stroke="url(#aOrbitFront)"/></g></g>
+            <g class="ob" data-o="13"><g transform="translate(500 500) rotate(13)"><path d="M-400 0 A400 168 0 0 0 400 0" pathLength="1" stroke="url(#aOrbitLive)" stroke-width="2.4"/></g></g>
+            <g class="ob" data-o="-3"><g transform="translate(500 500) rotate(-3)"><path d="M-455 0 A455 62 0 0 0 455 0" pathLength="1" stroke="url(#aOrbitFront)"/></g></g>
+          </g>
+          <g class="s1-pulse"><circle cx="662" cy="687" r="6" fill="#B4D98F"/><circle cx="662" cy="687" r="16" fill="#87BF4E" opacity=".18"/></g>
+        </svg>
+        <span class="chip chip--back" style="left:7.6%;top:56.5%"><i></i>طلبات العملاء <b>01</b></span>
+        <span class="chip chip--back" style="left:14.7%;top:35.9%"><i></i>التأشيرات <b>04</b></span>
+        <span class="chip chip--back" style="left:81.2%;top:32.1%"><i></i>المالية والفوترة <b>06</b></span>
+        <span class="chip chip--back" style="left:85.6%;top:49.6%"><i></i>المكاتب الخارجية <b>08</b></span>
+        <span class="chip" style="left:14.9%;top:51%"><i></i>السير الذاتية <b>02</b></span>
+        <span class="chip" style="left:33.3%;top:56.6%"><i></i>خدمة العملاء <b>07</b></span>
+        <span class="chip chip--live" style="left:74.3%;top:54.8%"><i></i>العقود <b>03</b></span>
+        <span class="chip chip--live" style="left:82.6%;top:65.6%"><i></i>السفر والوصول <b>05</b></span>
+        <div class="proof">
+          <div class="proof__row"><span class="proof__id">عقد #1024</span><span class="proof__demo">بيانات تجريبية</span></div>
+          <div class="proof__status">تم إصدار التأشيرة</div>
+          <div class="proof__bar"></div>
+        </div>
+      </div>
+
+      <div class="rail" aria-hidden="true"><div class="rail__inner">
+        <span class="rail__item is-active"><b>01</b>نظام واحد</span><span class="rail__item"><b>02</b>سهولة الإدارة</span><span class="rail__item"><b>03</b>تناغم الأقسام</span><span class="rail__item"><b>04</b>القطاع السعودي</span><span class="rail__item"><b>05</b>ابدأ</span>
+        <span class="rail__cue">مرّر للمتابعة<span></span></span>
+      </div></div>
+    </section>
+
+    <!-- ================================================================
+         S2 · Business transformation
+         ================================================================ -->
+    <section class="sc s2" id="scene-2" aria-labelledby="s2-title">
+      <div class="sc__wrap">
+        <div class="s2__top">
+          <div>
+            <p class="eyebrow"><b>02</b> التحول</p>
+            <h2 class="title" id="s2-title"><span>من تعدد المهام</span><span>إلى <em>سهولة الإدارة</em></span></h2>
+          </div>
+          <p class="lead">بدل الجداول المتفرقة والملفات الورقية والمتابعة بالمكالمات، كل مهمة في كليك لها مسؤول وموعد وحالة واضحة.</p>
+        </div>
+
+        <div class="s2__stage" aria-hidden="true">
+          <!-- before: tangled orbits (reading starts on the right) -->
+          <div class="s2__panel">
+            <span class="s2__label">قبل</span>
+            <svg viewBox="0 0 640 440">
+              <g class="chaos" fill="none" stroke="#B9C2D0" stroke-width="1.4">
+                <ellipse cx="300" cy="230" rx="240" ry="70" transform="rotate(-24 300 230)" stroke-opacity=".35"/>
+                <ellipse cx="350" cy="210" rx="200" ry="110" transform="rotate(38 350 210)" stroke-opacity=".25"/>
+                <ellipse cx="330" cy="250" rx="260" ry="50" transform="rotate(8 330 250)" stroke-opacity=".4"/>
+                <ellipse cx="280" cy="200" rx="160" ry="90" transform="rotate(-62 280 200)" stroke-opacity=".3"/>
+                <ellipse cx="340" cy="240" rx="220" ry="80" transform="rotate(70 340 240)" stroke-opacity=".22"/>
+                <ellipse cx="290" cy="225" rx="180" ry="120" transform="rotate(15 290 225)" stroke-opacity=".2"/>
+                <ellipse cx="320" cy="195" rx="250" ry="60" transform="rotate(-45 320 195)" stroke="#D9932B" stroke-opacity=".45" stroke-dasharray="4 6"/>
+              </g>
+              <g class="chaos-dots" fill="#D9932B" opacity=".7"><circle cx="190" cy="160" r="3.5"/><circle cx="452" cy="300" r="3.5"/><circle cx="388" cy="118" r="3.5"/></g>
+            </svg>
+            <span class="chip chip--warn" style="left:20%;top:20%;--r:-6deg"><i></i>جداول متفرقة</span>
+            <span class="chip chip--warn" style="left:74%;top:16%;--r:5deg"><i></i>ملفات ورقية</span>
+            <span class="chip chip--warn" style="left:82%;top:58%;--r:-4deg"><i></i>مكالمات متابعة</span>
+            <span class="chip chip--warn" style="left:50%;top:44%;--r:3deg"><i></i>أكثر من برنامج</span>
+            <span class="chip chip--warn" style="left:14%;top:66%;--r:7deg"><i></i>رسائل متفرقة</span>
+            <span class="chip chip--warn" style="left:48%;top:86%;--r:-3deg"><i></i>تذكير يدوي</span>
+          </div>
+
+          <div class="s2__seam"><span>نظام كليك
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span></div>
+
+          <!-- after: the same orbits settle into the logo's calm ripples -->
+          <div class="s2__panel">
+            <span class="s2__label s2__label--calm">بعد</span>
+            <svg viewBox="0 0 640 440">
+              <g class="calm-rings" fill="none" stroke="#B9C2D0">
+                <circle cx="320" cy="220" r="118" stroke-opacity=".28"/>
+                <circle cx="320" cy="220" r="152" stroke-opacity=".2"/>
+                <circle cx="320" cy="220" r="190" stroke="#87BF4E" stroke-opacity=".7" stroke-width="1.8"/>
+              </g>
+              <ellipse cx="320" cy="328" rx="110" ry="14" fill="#02050B" opacity=".5" filter="url(#aBlur)"/>
+              <use class="mark" href="#mk3d" x="225" y="125" width="190" height="190"/>
+              <rect class="mark-box" x="225" y="125" width="190" height="190" fill="none"/>
+              <g class="calm-dots" fill="#B4D98F"><circle cx="174.5" cy="342" r="4"/><circle cx="130" cy="220" r="4"/><circle cx="174.5" cy="98" r="4"/></g>
+            </svg>
+            <span class="chip chip--live" style="left:27.3%;top:22.3%"><i></i>حالة واضحة لكل عقد</span>
+            <span class="chip chip--live" style="left:20.3%;top:50%"><i></i>مواعيد وتنبيهات تلقائية</span>
+            <span class="chip chip--live" style="left:27.3%;top:77.7%"><i></i>كل مهمة لها مسؤول</span>
+          </div>
+        </div>
+        <p class="u-vh">وصف المشهد: على اليمين مدارات متشابكة تحمل مهامًا متفرقة: جداول متفرقة، ملفات ورقية، مكالمات متابعة، أكثر من برنامج، رسائل متفرقة، تذكير يدوي. على اليسار تنتظم المدارات نفسها في دوائر هادئة حول علامة كليك: حالة واضحة لكل عقد، مواعيد وتنبيهات تلقائية، كل مهمة لها مسؤول.</p>
+      </div>
+      <div class="rail" aria-hidden="true"><div class="rail__inner">
+        <span class="rail__item"><b>01</b>نظام واحد</span><span class="rail__item is-active"><b>02</b>سهولة الإدارة</span><span class="rail__item"><b>03</b>تناغم الأقسام</span><span class="rail__item"><b>04</b>القطاع السعودي</span><span class="rail__item"><b>05</b>ابدأ</span>
+      </div></div>
+    </section>
+
+    <!-- ================================================================
+         S3 · Connected business
+         ================================================================ -->
+    <section class="sc s3" id="scene-3" aria-labelledby="s3-title">
+      <div class="sc__wrap">
+        <p class="eyebrow"><b>03</b> الترابط</p>
+        <h2 class="title" id="s3-title"><span>كل أقسام شركتك</span><span>تعمل <em>بتناغم</em></span></h2>
+        <p class="lead">المبيعات والعمليات والمالية وخدمة العملاء والموارد البشرية والإدارة تعمل على البيانات نفسها، فيصل كل تحديث للجميع في اللحظة نفسها.</p>
+
+        <div class="s3__hub" aria-hidden="true">
+          <svg viewBox="0 0 1000 540">
+            <path class="ring" pathLength="1" d="M80 270 A420 190 0 0 1 920 270" fill="none" stroke="url(#aRingLive)" stroke-width="2" stroke-opacity=".6"/>
+            <g class="s3-inner" fill="none" stroke="#B9C2D0" stroke-opacity=".12">
+              <ellipse cx="500" cy="270" rx="310" ry="140"/><ellipse cx="500" cy="270" rx="225" ry="102"/>
+            </g>
+            <g class="spokes" stroke="#87BF4E" stroke-opacity=".35" stroke-width="1.2" stroke-dasharray="2 6">
+              <path d="M500 270 L500 80"/><path d="M500 270 L864 175"/><path d="M500 270 L864 365"/>
+              <path d="M500 270 L500 460"/><path d="M500 270 L136 365"/><path d="M500 270 L136 175"/>
+            </g>
+            <ellipse cx="490" cy="395" rx="140" ry="16" fill="#02050B" opacity=".6" filter="url(#aBlur)"/>
+            <use class="mark" href="#mk3d" x="370" y="140" width="260" height="260"/>
+            <rect class="mark-box" x="370" y="140" width="260" height="260" fill="none"/>
+            <path class="ring" pathLength="1" d="M80 270 A420 190 0 0 0 920 270" fill="none" stroke="url(#aRingLive)" stroke-width="3"/>
+            <g class="s3-pulses" fill="#B4D98F"><circle cx="682" cy="222" r="4"/><circle cx="318" cy="318" r="4"/><circle cx="500" cy="365" r="4"/></g>
+            <g class="s3-pulses" fill="#87BF4E" opacity=".2"><circle cx="682" cy="222" r="12"/><circle cx="318" cy="318" r="12"/><circle cx="500" cy="365" r="12"/></g>
+          </svg>
+          <div class="dept dept--back" style="left:50%;top:14.8%"><strong>الإدارة</strong><span>التقارير والقرارات</span></div>
+          <div class="dept dept--back" style="left:13.6%;top:32.4%"><strong>المبيعات</strong><span>طلبات العملاء</span></div>
+          <div class="dept dept--back" style="left:86.4%;top:32.4%"><strong>المالية</strong><span>الفواتير والتحصيل</span></div>
+          <div class="dept" style="left:13.6%;top:67.6%"><strong>العمليات</strong><span>العقود والتأشيرات</span></div>
+          <div class="dept" style="left:86.4%;top:67.6%"><strong>خدمة العملاء</strong><span>المتابعة والرد</span></div>
+          <div class="dept" style="left:50%;top:85.2%"><strong>الموارد البشرية</strong><span>العمالة والإقامات</span></div>
+        </div>
+        <p class="u-vh">وصف المشهد: علامة كليك في المركز وحولها حلقة واحدة تتصل بها ستة أقسام: الإدارة، المبيعات، المالية، العمليات، خدمة العملاء، الموارد البشرية. كل قسم موصول بالمركز نفسه، وتحديث واحد يصل إلى الأقسام الستة.</p>
+      </div>
+      <div class="rail" aria-hidden="true"><div class="rail__inner">
+        <span class="rail__item"><b>01</b>نظام واحد</span><span class="rail__item"><b>02</b>سهولة الإدارة</span><span class="rail__item is-active"><b>03</b>تناغم الأقسام</span><span class="rail__item"><b>04</b>القطاع السعودي</span><span class="rail__item"><b>05</b>ابدأ</span>
+      </div></div>
+    </section>
+
+    <!-- ================================================================
+         S4 · Saudi specialisation
+         ================================================================ -->
+    <section class="sc s4" id="scene-4" aria-labelledby="s4-title">
+      <div class="sc__wrap">
+        <div class="s4__copy">
+          <p class="eyebrow"><b>04</b> التخصص</p>
+          <h2 class="title" id="s4-title"><span>صُمم لقطاع</span><span><em>الاستقدام السعودي</em></span></h2>
+          <p class="lead">مبني حول مراحل الاستقدام في المملكة كما تعرفها مكاتب القطاع، من الطلب والتفويض والتأشيرة حتى الوصول والضمان.</p>
+          <ul class="s4__list" aria-hidden="true">
+            <li class="chip chip--live"><i></i>عربي أولًا</li>
+            <li class="chip chip--live"><i></i>عقود العمالة المنزلية والمهنية</li>
+            <li class="chip chip--pending"><i></i>منصة مساند <small>*</small></li>
+            <li class="chip chip--pending"><i></i>الفوترة الإلكترونية <small>*</small></li>
+            <li class="chip chip--pending"><i></i>استضافة داخل المملكة <small>*</small></li>
+          </ul>
+        </div>
+      </div>
+      <div class="s4__land" aria-hidden="true">
+        <div class="s4__land-in">
+          <svg viewBox="0 0 1440 520">
+            <defs>
+              <mask id="s4Reflect" maskUnits="userSpaceOnUse" x="0" y="214" width="1440" height="300">
+                <rect x="0" y="214" width="1440" height="200" fill="url(#aReflectFade)"/>
+              </mask>
+            </defs>
+            <!-- dawn horizon -->
+            <rect class="horizon" x="0" y="108" width="1440" height="3" fill="url(#aHorizon)"/>
+            <rect class="horizon" x="0" y="60" width="1440" height="50" fill="url(#aHorizon)" opacity=".12"/>
+            <!-- the ground: click ripples laid flat in perspective -->
+            <g class="ground" fill="none" stroke="#B9C2D0">
+              <ellipse cx="440" cy="214" rx="170" ry="29" stroke-opacity=".4" stroke="#87BF4E"/>
+              <ellipse cx="440" cy="214" rx="260" ry="44" stroke-opacity=".22"/>
+              <ellipse cx="440" cy="214" rx="380" ry="65" stroke-opacity=".17"/>
+              <ellipse cx="440" cy="214" rx="540" ry="92" stroke-opacity=".13"/>
+              <ellipse cx="440" cy="214" rx="740" ry="126" stroke-opacity=".1"/>
+              <ellipse cx="440" cy="214" rx="980" ry="167" stroke-opacity=".08"/>
+              <ellipse cx="440" cy="214" rx="1260" ry="214" stroke-opacity=".06"/>
+            </g>
+            <!-- reflection -->
+            <g class="reflect" mask="url(#s4Reflect)" opacity=".35">
+              <use href="#mk3d" x="290" y="-40" width="300" height="300" transform="translate(0 428) scale(1 -1)"/>
+            </g>
+            <ellipse cx="430" cy="214" rx="130" ry="14" fill="#02050B" opacity=".7" filter="url(#aBlur)"/>
+            <use class="mark" href="#mk3d" x="290" y="-40" width="300" height="300"/>
+            <rect class="mark-box" x="290" y="-40" width="300" height="300" fill="none"/>
+            <!-- pins under the sector markers -->
+            <g class="pins" stroke="#E8D9B8" stroke-opacity=".35">
+              <path d="M864 162 V176"/><path d="M1123 214 V228"/><path d="M749 297 V311"/><path d="M1037 359 V373"/><path d="M1296 307 V321"/><path d="M1267 170 V184"/>
+            </g>
+            <g class="pins" fill="#E8D9B8" opacity=".35">
+              <ellipse cx="864" cy="176" rx="12" ry="2.5"/><ellipse cx="1123" cy="228" rx="14" ry="3"/><ellipse cx="749" cy="311" rx="16" ry="3.5"/>
+              <ellipse cx="1037" cy="373" rx="18" ry="4"/><ellipse cx="1296" cy="321" rx="16" ry="3.5"/><ellipse cx="1267" cy="184" rx="12" ry="2.5"/>
+            </g>
+          </svg>
+          <span class="chip chip--back" style="left:60%;top:28%"><i></i>مراحل الاستقدام في المملكة</span>
+          <span class="chip chip--pending" style="left:78%;top:38%"><i></i>منصة مساند <small>*</small></span>
+          <span class="chip chip--pending" style="left:52%;top:54%"><i></i>الفوترة الإلكترونية <small>*</small></span>
+          <span class="chip chip--pending" style="left:72%;top:66%"><i></i>استضافة داخل المملكة <small>*</small></span>
+          <span class="chip chip--live" style="left:90%;top:56%"><i></i>عربي أولًا</span>
+          <span class="chip chip--live chip--far" style="left:88%;top:30%"><i></i>عقود العمالة المنزلية والمهنية</span>
+        </div>
+      </div>
+      <p class="s4__note">* صياغة التكاملات بانتظار التأكيد</p>
+      <p class="u-vh">وصف المشهد: علامة كليك تقف على أرض من دوائر النقرة عند أفق الفجر، وحولها علامات القطاع: مراحل الاستقدام في المملكة، منصة مساند، الفوترة الإلكترونية، استضافة داخل المملكة، عربي أولًا، عقود العمالة المنزلية والمهنية. صياغة التكاملات بانتظار التأكيد.</p>
+      <div class="rail" aria-hidden="true"><div class="rail__inner">
+        <span class="rail__item"><b>01</b>نظام واحد</span><span class="rail__item"><b>02</b>سهولة الإدارة</span><span class="rail__item"><b>03</b>تناغم الأقسام</span><span class="rail__item is-active"><b>04</b>القطاع السعودي</span><span class="rail__item"><b>05</b>ابدأ</span>
+      </div></div>
+    </section>
+
+    <!-- ================================================================
+         S5 · Conversion
+         ================================================================ -->
+    <section class="sc s5" id="scene-5" aria-labelledby="s5-title">
+      <div class="sc__wrap">
+        <p class="eyebrow"><b>05</b> ابدأ الآن</p>
+        <h2 class="title title--xl" id="s5-title"><span>خلّ أعمالك</span><span>تمشي <em>بنظام</em></span></h2>
+        <p class="lead">شاهد نظام كليك يعمل على بيانات تشبه بيانات مكتبك في عرض توضيحي مخصص.</p>
+        <div class="ctas">
+          <span class="s5__primary">
+            <a class="ad-btn ad-btn--primary ad-btn--lg" href="#">احجز عرضًا توضيحيًا</a>
+            <span class="s5__anchor" aria-hidden="true">
+              <svg class="s5__ripples" viewBox="-900 -900 1800 1800">
+                <g fill="none" stroke="#87BF4E">
+                  <circle r="70" stroke-opacity=".5" stroke-width="2"/><circle r="130" stroke-opacity=".3"/>
+                  <circle r="210" stroke-opacity=".18"/><circle r="310" stroke-opacity=".1"/>
+                  <circle r="430" stroke-opacity=".07"/><circle r="580" stroke-opacity=".05"/><circle r="760" stroke-opacity=".035"/>
+                </g>
+              </svg>
+              <svg class="s5__arrow"><use href="#arrow3d"/></svg>
+            </span>
+          </span>
+          <a class="ad-btn ad-btn--ghost-dark ad-btn--lg" href="#after-hero">اكتشف النظام</a>
+        </div>
+        <div class="s5__assure"><span>نقل بياناتك</span><span>تدريب فريقك</span><span>ضمان 365 يومًا</span></div>
+      </div>
+      <div class="rail" aria-hidden="true"><div class="rail__inner">
+        <span class="rail__item"><b>01</b>نظام واحد</span><span class="rail__item"><b>02</b>سهولة الإدارة</span><span class="rail__item"><b>03</b>تناغم الأقسام</span><span class="rail__item"><b>04</b>القطاع السعودي</span><span class="rail__item is-active"><b>05</b>ابدأ</span>
+      </div></div>
+    </section>
+
+    <svg class="actor" viewBox="0 0 1000 1000" aria-hidden="true" focusable="false"><use href="#mk3d" width="1000" height="1000"/></svg>
+    </div>
+
+    <!-- ================= HOMEPAGE · Direction A «المسار الأخضر» =================
+         Hand-off: the arrow clicks the demo CTA in scene 5; from that click a green line
+         drops through the night, and becomes the spine that runs every section below. -->
+    <div class="pg" id="after-hero">
+    <svg class="defs" aria-hidden="true" focusable="false"><defs>
+      <path id="mkC" d="M748.7 667.8 A300 300 0 1 1 729.8 307.2 L626.4 393.9 A165 165 0 1 0 636.8 592.3Z"/>
+      <path id="mkA" d="M0 0 L236 74 Q244 77 236 82 L132 118 Q122 122 118 132 L82 236 Q77 244 74 236 Z"/>
+      <symbol id="mark" viewBox="150 150 700 700"><use href="#mkC" fill="currentColor"/><path transform="translate(508 508)" d="M0 0 L236 74 Q244 77 236 82 L132 118 Q122 122 118 132 L82 236 Q77 244 74 236 Z" fill="#87BF4E" stroke="var(--mark-cut, #1B2740)" stroke-width="22" paint-order="stroke"/></symbol>
+    </defs></svg>
+      <div class="spine" aria-hidden="true"></div>
+      <svg class="handoff" aria-hidden="true"><path class="route__p handoff__p"/></svg>
+      <div class="arc" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 0 H1440 V40 Q720 150 0 40 Z"/></svg></div>
+
+      <section class="sec trust" id="trust" aria-labelledby="trust-t">
+        <svg class="route" aria-hidden="true"><path class="route__p"/></svg>
+        <div class="wrap">
+          <p class="eyebrow"><b>01</b> الثقة</p>
+          <h2 class="h2" id="trust-t">شركات ومكاتب استقدام في المملكة <span class="hl">تدير أعمالها بنظام كليك</span></h2>
+          <div class="figs" data-baseline>
+            <div class="fig"><b data-count="10" data-prefix="+">+10</b><span>شركات استقدام تعمل على النظام</span><small class="pend">بانتظار التأكيد</small></div>
+            <div class="fig"><b data-count="35" data-prefix="+">+35</b><span>موقعًا لمكاتب الاستقدام</span><small class="pend">بانتظار التأكيد</small></div>
+            <div class="fig"><b data-count="6" data-prefix="+">+6</b><span>سنوات في القطاع</span><small class="pend">بانتظار التأكيد</small></div>
+            <div class="fig"><b data-count="100" data-suffix="%">100%</b><span>علامة سعودية</span><small class="pend">بانتظار التأكيد</small></div>
+          </div>
+          <div class="ledger">
+            <p class="ledger__h">يعمل معنا <small>· تُعرض الشعارات بعد إذن أصحابها</small></p>
+            <ul class="ledger__row">
+              <li>مكتب استقدام · الرياض</li><li>شركة استقدام · جدة</li><li>مكتب استقدام · الدمام</li>
+              <li>شركة تأجير عمالة · الرياض</li><li>مكتب استقدام · القصيم</li><li>شركة استقدام · مكة</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+  
+      <!-- ============================================================ 3.2 BEFORE / AFTER -->
+      <section class="sec change" id="change" aria-labelledby="change-t">
+        <svg class="route" aria-hidden="true"><path class="route__p"/></svg>
+        <div class="wrap change__grid">
+          <div class="change__copy">
+            <p class="eyebrow"><b>02</b> قبل وبعد</p>
+            <h2 class="h2" id="change-t">من الملفات المتفرقة<br><span class="hl">إلى إدارة واضحة</span></h2>
+            <ol class="flips">
+              <li class="flip"><s>ملفات Excel متفرقة لكل قسم</s><span>كل الأقسام في نظام واحد</span></li>
+              <li class="flip"><s>متابعة الطلبات في مجموعات واتساب</s><span>مراحل العقد واضحة لكل الفريق</span></li>
+              <li class="flip"><s>تأخر التذاكر والتأشيرات دون تنبيه</s><span>تنبيه قبل أي تأخير</span></li>
+              <li class="flip"><s>إدخال البيانات أكثر من مرة</s><span>إدخال واحد يصل لكل الأقسام</span></li>
+              <li class="flip"><s>لا أحد يعرف أداء كل فرع</s><span>تقارير فورية لكل فرع</span></li>
+            </ol>
+          </div>
+          <figure class="knot" aria-hidden="true">
+            <svg viewBox="0 0 640 460">
+              <path class="knot__ghost" d="M640 230 C 560 230, 540 120, 470 120 C 380 120, 420 330, 330 330 C 230 330, 300 90, 210 100 C 120 110, 200 380, 120 360 C 60 345, 90 230, 0 230"/>
+              <path class="knot__p" d="M640 230 C 560 230, 540 120, 470 120 C 380 120, 420 330, 330 330 C 230 330, 300 90, 210 100 C 120 110, 200 380, 120 360 C 60 345, 90 230, 0 230"/>
+              <path class="knot__straight" d="M640 230 C 560 230, 540 230, 470 230 C 380 230, 420 230, 330 230 C 230 230, 300 230, 210 230 C 120 230, 200 230, 120 230 C 60 230, 90 230, 0 230"/>
+              <g class="knot__tags">
+                <text x="470" y="100">Excel</text><text x="330" y="360">واتساب</text><text x="210" y="80">تأخير</text><text x="120" y="390">إدخال مكرر</text>
+              </g>
+            </svg>
+            <figcaption>الطريقة القديمة تُفك عقدةً عقدة</figcaption>
+          </figure>
+        </div>
+      </section>
+  
+      <!-- ============================================================ 3.3 MODULES -->
+      <section class="sec modules" id="modules" aria-labelledby="modules-t">
+        <svg class="route" aria-hidden="true"><path class="route__p"/><g class="route__branches"></g></svg>
+        <div class="wrap">
+          <div class="modules__head">
+            <p class="big20" aria-hidden="true">20</p>
+            <div>
+              <p class="eyebrow"><b>03</b> الوحدات</p>
+              <h2 class="h2" id="modules-t">20 وحدة متكاملة <span class="hl">تغطي كل أقسام شركتك</span></h2>
+              <p class="lead">منصة تربط مكتبك بالجهات الحكومية والخاصة وبعملائك، وتتابع كل مراحل الاستقدام في مكان واحد.</p>
+            </div>
+          </div>
+          <ol class="stations" data-trunk>
+            <li class="station" tabindex="0"><i class="ph ph-handshake" aria-hidden="true"></i><h3>الاستقدام والتأجير</h3><p>الطلبات · السير الذاتية · عقود الاستقدام · تأجير العمالة · الوكلاء الخارجيين</p></li>
+            <li class="station" tabindex="0"><i class="ph ph-truck" aria-hidden="true"></i><h3>النقل والإيواء</h3><p>نقل الخدمات · الإيواء والتسكين · الخدمات اللوجستية</p></li>
+            <li class="station" tabindex="0"><i class="ph ph-users-three" aria-hidden="true"></i><h3>العملاء</h3><p>إدارة العملاء · خدمة العملاء والمسوقين · الشكاوى · الرسائل والتنبيهات</p></li>
+            <li class="station" tabindex="0"><i class="ph ph-wallet" aria-hidden="true"></i><h3>المالية</h3><p>النظام المحاسبي · الفوترة الإلكترونية · المطالبات المالية</p></li>
+            <li class="station" tabindex="0"><i class="ph ph-identification-badge" aria-hidden="true"></i><h3>الموارد البشرية</h3><p>الموظفون · الحضور · الرواتب</p></li>
+            <li class="station" tabindex="0"><i class="ph ph-chart-line-up" aria-hidden="true"></i><h3>الإدارة والتحكم</h3><p>لوحات المؤشرات · التقارير · الفروع · الأمان والصلاحيات</p></li>
+          </ol>
+          <a class="more" href="#">اكتشف كل الوحدات<i class="ph ph-arrow-left" aria-hidden="true"></i></a>
+        </div>
+      </section>
+  
+      <!-- ============================================================ 3.4 ROLE TOUR -->
+      <section class="sec tour" id="tour" aria-labelledby="tour-t">
+        <svg class="route" aria-hidden="true"><path class="route__p"/></svg>
+        <div class="wrap">
+          <p class="eyebrow"><b>04</b> النظام من الداخل</p>
+          <h2 class="h2" id="tour-t">نظام واحد، <span class="hl">ولكل فريق شاشته</span></h2>
+          <div class="ask">
+            <span>أنا</span>
+            <div class="ask__roles" role="radiogroup" aria-label="اختر دورك في الشركة">
+              <button type="button" role="radio" aria-checked="true" data-role="mgmt">مالك المكتب</button>
+              <button type="button" role="radio" aria-checked="false" data-role="ops" tabindex="-1">مدير العمليات</button>
+              <button type="button" role="radio" aria-checked="false" data-role="fin" tabindex="-1">المحاسب</button>
+              <button type="button" role="radio" aria-checked="false" data-role="cs" tabindex="-1">خدمة العملاء</button>
+            </div>
+            <span>وأريد أن أرى</span>
+            <output class="ask__want" aria-live="polite">أداء كل الفروع في شاشة واحدة</output>
+          </div>
+        </div>
+        <div class="stage">
+          <svg class="leaders" aria-hidden="true"></svg>
+          <div class="callouts callouts--start" aria-live="polite"></div>
+          <div class="frame" role="img" aria-label="شاشة من نظام كليك ببيانات تجريبية، تتغير حسب الدور المختار">
+            <div class="frame__bar" aria-hidden="true"><s></s><s></s><s></s><span class="frame__url">نظام كليك</span></div>
+            <div class="frame__screens" aria-hidden="true">
+  <div class="shot" data-role="mgmt">
+    <div class="app">
+      <aside class="app__side">
+        <span class="app__brand"><svg viewBox="150 150 700 700" aria-hidden="true"><use href="#aC" fill="#fff"/><path transform="translate(508 508)" d="M0 0 L236 74 Q244 77 236 82 L132 118 Q122 122 118 132 L82 236 Q77 244 74 236 Z" fill="#87BF4E" stroke="#1B2740" stroke-width="22" paint-order="stroke"/></svg>نظام كليك</span>
+        <span class="app__nav is-on"><i class="ph ph-squares-four"></i>الرئيسية</span>
+  <span class="app__nav"><i class="ph ph-tray"></i>الطلبات</span>
+  <span class="app__nav"><i class="ph ph-identification-card"></i>السير الذاتية</span>
+  <span class="app__nav"><i class="ph ph-file-text"></i>عقود الاستقدام</span>
+  <span class="app__nav"><i class="ph ph-arrows-left-right"></i>التأجير</span>
+  <span class="app__nav"><i class="ph ph-users-three"></i>العملاء</span>
+  <span class="app__nav"><i class="ph ph-wallet"></i>المالية</span>
+  <span class="app__nav"><i class="ph ph-user-gear"></i>الموارد البشرية</span>
+  <span class="app__nav"><i class="ph ph-chart-bar"></i>التقارير</span>
+        <small>مكتب نموذجي · فرع الرياض</small>
+      </aside>
+      <div class="app__main">
+        <div class="app__top">
+          <span class="app__title">لوحة المؤشرات</span><span class="app__demo">بيانات تجريبية</span>
+          <span class="app__search"><i class="ph ph-magnifying-glass"></i>بحث برقم العقد أو اسم العميل</span>
+          <span class="app__chip"><i class="ph ph-buildings"></i>كل الفروع</span>
+          <span class="app__bell"><i class="ph ph-bell"></i></span>
+          <span class="app__avatar">م ع</span>
+        </div>
+        <div class="app__body">
+  <div class="kpis">
+    <div class="card kpi"><small>إيرادات الشهر</small><b class="num">428,600<sub>ر.س</sub></b><span class="up">▲ 12% عن الشهر الماضي</span></div>
+    <div class="card kpi"><small>عقود موقّعة</small><b class="num">86</b><span class="up">▲ 9 عقود</span></div>
+    <div class="card kpi"><small>متوسط مدة الإنجاز</small><b class="num">47<sub>يومًا</sub></b><span class="up">▼ 5 أيام أسرع</span></div>
+    <div class="card kpi kpi--alert"><span class="pin">2</span><small>مستحقات متأخرة</small><b class="num">62,400<sub>ر.س</sub></b><span class="warn">14 مطالبة</span></div>
+  </div>
+  <div class="row" style="grid-template-columns: 1.55fr 1fr">
+    <div class="card"><div class="card__h">العقود الموقّعة شهريًا <small>آخر 6 أشهر</small></div>
+      <div class="bars">
+        <span style="--h:52%"><b>61</b><em>يونيو</em></span><span style="--h:58%"><b>68</b><em>يوليو</em></span>
+        <span style="--h:55%"><b>64</b><em>أغسطس</em></span><span style="--h:66%"><b>71</b><em>سبتمبر</em></span>
+        <span style="--h:72%"><b>77</b><em>أكتوبر</em></span><span class="is-now" style="--h:82%"><b>86</b><em>نوفمبر</em></span>
+      </div>
+    </div>
+    <div class="card"><span class="pin">1</span><div class="card__h">الإيرادات حسب الفرع <small>هذا الشهر</small></div>
+      <div class="hb">
+        <div><span>الرياض</span><i style="--w:92%"></i><b>46%</b></div>
+        <div><span>جدة</span><i style="--w:62%;--c:#6D788C"></i><b>31%</b></div>
+        <div><span>الدمام</span><i style="--w:46%;--c:#9FB3D1"></i><b>23%</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="card"><span class="pin">3</span><div class="card__h">عبء العمل على الفرق <small>اليوم</small></div>
+    <div class="tbl" style="--cols: 1.3fr .8fr .8fr 2fr">
+      <div><span>الفريق</span><span>مهام مفتوحة</span><span>متأخرة</span><span>الإنجاز هذا الأسبوع</span></div>
+      <div><span>العمليات</span><span class="num">34</span><span class="st st--warn">3</span><span class="hb"><div style="grid-template-columns:1fr 3em"><i style="--w:72%;--c:#87BF4E"></i><b>72%</b></div></span></div>
+      <div><span>المالية</span><span class="num">18</span><span class="st st--warn">1</span><span class="hb"><div style="grid-template-columns:1fr 3em"><i style="--w:84%;--c:#87BF4E"></i><b>84%</b></div></span></div>
+      <div><span>خدمة العملاء</span><span class="num">27</span><span class="st st--ok">0</span><span class="hb"><div style="grid-template-columns:1fr 3em"><i style="--w:91%;--c:#87BF4E"></i><b>91%</b></div></span></div>
+    </div>
+  </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="shot" data-role="ops">
+    <div class="app">
+      <aside class="app__side">
+        <span class="app__brand"><svg viewBox="150 150 700 700" aria-hidden="true"><use href="#aC" fill="#fff"/><path transform="translate(508 508)" d="M0 0 L236 74 Q244 77 236 82 L132 118 Q122 122 118 132 L82 236 Q77 244 74 236 Z" fill="#87BF4E" stroke="#1B2740" stroke-width="22" paint-order="stroke"/></svg>نظام كليك</span>
+        <span class="app__nav"><i class="ph ph-squares-four"></i>الرئيسية</span>
+  <span class="app__nav"><i class="ph ph-tray"></i>الطلبات</span>
+  <span class="app__nav"><i class="ph ph-identification-card"></i>السير الذاتية</span>
+  <span class="app__nav is-on"><i class="ph ph-file-text"></i>عقود الاستقدام</span>
+  <span class="app__nav"><i class="ph ph-arrows-left-right"></i>التأجير</span>
+  <span class="app__nav"><i class="ph ph-users-three"></i>العملاء</span>
+  <span class="app__nav"><i class="ph ph-wallet"></i>المالية</span>
+  <span class="app__nav"><i class="ph ph-user-gear"></i>الموارد البشرية</span>
+  <span class="app__nav"><i class="ph ph-chart-bar"></i>التقارير</span>
+        <small>مكتب نموذجي · فرع الرياض</small>
+      </aside>
+      <div class="app__main">
+        <div class="app__top">
+          <span class="app__title">عقود الاستقدام</span><span class="app__demo">بيانات تجريبية</span>
+          <span class="app__search"><i class="ph ph-magnifying-glass"></i>بحث برقم العقد أو اسم العميل</span>
+          <span class="app__chip"><i class="ph ph-buildings"></i>كل الفروع</span>
+          <span class="app__bell"><i class="ph ph-bell"></i></span>
+          <span class="app__avatar">م ع</span>
+        </div>
+        <div class="app__body">
+  <div class="stages has-pin"><span class="pin">1</span>
+    <span><b>12</b>طلب جديد</span><span><b>9</b>اختيار السيرة</span><span><b>7</b>مساند</span><span><b>6</b>التفويض</span>
+    <span><b>8</b>التأشيرة</span><span class="is-hot"><b>5</b>التذكرة</span><span><b>4</b>الوصول</span><span><b>21</b>الضمان</span>
+  </div>
+  <div class="toolbar">
+    <span class="app__chip is-on">الكل · 72</span><span class="app__chip has-pin"><span class="pin">3</span><i class="ph ph-warning"></i>متأخرة · 3</span>
+    <span class="app__chip">مستحقة اليوم · 5</span><span class="app__chip"><i class="ph ph-funnel"></i>الجنسية</span>
+    <span class="btn-new"><i class="ph ph-plus"></i>عقد جديد</span>
+  </div>
+  <div class="card" style="padding-block:.4em">
+    <div class="tbl" style="--cols: .75fr 1.15fr 1.1fr .9fr 1fr .95fr 1.55fr">
+      <div><span>العقد</span><span>العميل</span><span>المهنة</span><span>الجنسية</span><span>المرحلة</span><span>الموعد</span><span>ملاحظة</span></div>
+      <div class="is-alert has-pin"><span class="pin">2</span><span class="num">#1024</span><span>عبدالله س.</span><span>عاملة منزلية</span><span>الفلبين</span><span class="st st--warn">التذكرة</span><span class="num">18 نوفمبر</span><span class="warn"><i class="ph ph-warning"></i> الحجز متأخر يومين</span></div>
+      <div><span class="num">#1023</span><span>نورة م.</span><span>سائق خاص</span><span>الهند</span><span class="st st--info">التأشيرة</span><span class="num">20 نوفمبر</span><span class="muted">بانتظار الإصدار</span></div>
+      <div><span class="num">#1021</span><span>مؤسسة نموذجية</span><span>عامل نظافة</span><span>بنغلاديش</span><span class="st st--info">التفويض</span><span class="num">22 نوفمبر</span><span class="muted">—</span></div>
+      <div><span class="num">#1019</span><span>فهد ع.</span><span>عاملة منزلية</span><span>كينيا</span><span class="st st--ok">الوصول</span><span class="num">16 نوفمبر</span><span class="up">وصلت · بدأ الضمان</span></div>
+      <div><span class="num">#1018</span><span>سارة ح.</span><span>ممرضة منزلية</span><span>الفلبين</span><span class="st st--mute">مساند</span><span class="num">25 نوفمبر</span><span class="muted">—</span></div>
+      <div><span class="num">#1015</span><span>خالد ر.</span><span>طباخ</span><span>إندونيسيا</span><span class="st st--ok">الضمان</span><span class="num">—</span><span class="muted">متبقٍ 61 يومًا</span></div>
+    </div>
+  </div>
+  <div class="row" style="grid-template-columns: 1fr 1fr 1fr">
+    <div class="card"><div class="card__h">مهامي اليوم <small>3 من 5</small></div>
+      <div class="list">
+        <span><span><i class="ph ph-check-square"></i> تأكيد حجز تذكرة #1024</span><span class="warn">عاجل</span></span>
+        <span><span><i class="ph ph-check-square"></i> رفع مستندات التفويض #1021</span><span class="muted">10:30</span></span>
+        <span><span><i class="ph ph-square"></i> الاتصال بالعميل نورة م.</span><span class="muted">13:00</span></span>
+      </div>
+    </div>
+    <div class="card"><div class="card__h">الوصول هذا الأسبوع <small>4 عمالة</small></div>
+      <div class="list">
+        <span><span>#1019 · كينيا</span><span class="st st--ok">وصلت</span></span>
+        <span><span>#1011 · الفلبين</span><span class="muted">الأربعاء</span></span>
+        <span><span>#1008 · أوغندا</span><span class="muted">الخميس</span></span>
+      </div>
+    </div>
+    <div class="card"><div class="card__h">العقود حسب الجنسية</div>
+      <div class="hb">
+        <div><span>الفلبين</span><i style="--w:78%"></i><b>28</b></div>
+        <div><span>كينيا</span><i style="--w:52%;--c:#6D788C"></i><b>19</b></div>
+        <div><span>إندونيسيا</span><i style="--w:36%;--c:#9FB3D1"></i><b>13</b></div>
+      </div>
+    </div>
+  </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="shot" data-role="fin">
+    <div class="app">
+      <aside class="app__side">
+        <span class="app__brand"><svg viewBox="150 150 700 700" aria-hidden="true"><use href="#aC" fill="#fff"/><path transform="translate(508 508)" d="M0 0 L236 74 Q244 77 236 82 L132 118 Q122 122 118 132 L82 236 Q77 244 74 236 Z" fill="#87BF4E" stroke="#1B2740" stroke-width="22" paint-order="stroke"/></svg>نظام كليك</span>
+        <span class="app__nav"><i class="ph ph-squares-four"></i>الرئيسية</span>
+  <span class="app__nav"><i class="ph ph-tray"></i>الطلبات</span>
+  <span class="app__nav"><i class="ph ph-identification-card"></i>السير الذاتية</span>
+  <span class="app__nav"><i class="ph ph-file-text"></i>عقود الاستقدام</span>
+  <span class="app__nav"><i class="ph ph-arrows-left-right"></i>التأجير</span>
+  <span class="app__nav"><i class="ph ph-users-three"></i>العملاء</span>
+  <span class="app__nav is-on"><i class="ph ph-wallet"></i>المالية</span>
+  <span class="app__nav"><i class="ph ph-user-gear"></i>الموارد البشرية</span>
+  <span class="app__nav"><i class="ph ph-chart-bar"></i>التقارير</span>
+        <small>مكتب نموذجي · فرع الرياض</small>
+      </aside>
+      <div class="app__main">
+        <div class="app__top">
+          <span class="app__title">الفواتير والتحصيل</span><span class="app__demo">بيانات تجريبية</span>
+          <span class="app__search"><i class="ph ph-magnifying-glass"></i>بحث برقم العقد أو اسم العميل</span>
+          <span class="app__chip"><i class="ph ph-buildings"></i>كل الفروع</span>
+          <span class="app__bell"><i class="ph ph-bell"></i></span>
+          <span class="app__avatar">م ع</span>
+        </div>
+        <div class="app__body">
+  <div class="kpis kpis--3">
+    <div class="card kpi"><small>مفوتر هذا الشهر</small><b class="num">512,300<sub>ر.س</sub></b><span class="muted" style="font-size:.8em">94 فاتورة</span></div>
+    <div class="card kpi"><small>محصّل</small><b class="num">449,900<sub>ر.س</sub></b><span class="up">88% من المفوتر</span></div>
+    <div class="card kpi kpi--alert"><span class="pin">2</span><small>مطالبات مستحقة</small><b class="num">62,400<sub>ر.س</sub></b><span class="warn">14 مطالبة · 3 متأخرة</span></div>
+  </div>
+  <div class="row" style="grid-template-columns: 2.1fr 1fr">
+    <div class="card" style="padding-block:.4em">
+      <div class="tbl" style="--cols: .9fr .7fr 1.1fr 1fr .95fr .5fr">
+        <div><span>الفاتورة</span><span>العقد</span><span>العميل</span><span>المبلغ</span><span>الحالة</span><span class="has-pin"><span class="pin">1</span>QR</span></div>
+        <div><span class="num">INV-3381</span><span class="num">#1024</span><span>عبدالله س.</span><span class="num">14,950 ر.س</span><span class="st st--ok">مدفوعة</span><span><i class="ph ph-qr-code"></i></span></div>
+        <div><span class="num">INV-3380</span><span class="num">#1023</span><span>نورة م.</span><span class="num">11,500 ر.س</span><span class="st st--warn">جزئية</span><span><i class="ph ph-qr-code"></i></span></div>
+        <div><span class="num">INV-3378</span><span class="num">#1021</span><span>مؤسسة نموذجية</span><span class="num">32,200 ر.س</span><span class="st st--bad">مستحقة</span><span><i class="ph ph-qr-code"></i></span></div>
+        <div><span class="num">INV-3375</span><span class="num">#1019</span><span>فهد ع.</span><span class="num">15,400 ر.س</span><span class="st st--ok">مدفوعة</span><span><i class="ph ph-qr-code"></i></span></div>
+        <div><span class="num">INV-3371</span><span class="num">#1018</span><span>سارة ح.</span><span class="num">17,250 ر.س</span><span class="st st--ok">مدفوعة</span><span><i class="ph ph-qr-code"></i></span></div>
+      </div>
+    </div>
+    <div class="card"><span class="pin">3</span><div class="card__h">التحصيل هذا الشهر</div>
+      <div class="donut"><span class="donut__ring" data-v="88%"></span>
+        <div class="legend"><span><i style="--c:#87BF4E"></i>محصّل</span><span><i style="--c:#F1D29B"></i>جزئي</span><span><i style="--c:#E9B4AE"></i>متأخر</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="grid-template-columns: 1.2fr 1fr">
+    <div class="card"><div class="card__h">أعمار المستحقات <small>62,400 ر.س</small></div>
+      <div class="hb" style="--lab:6.5em">
+        <div style="grid-template-columns:6.5em 1fr 3.6em"><span>حتى 30 يومًا</span><i style="--w:58%;--c:#F1D29B"></i><b>36,100</b></div>
+        <div style="grid-template-columns:6.5em 1fr 3.6em"><span>31–60 يومًا</span><i style="--w:30%;--c:#E7A33A"></i><b>18,700</b></div>
+        <div style="grid-template-columns:6.5em 1fr 3.6em"><span>أكثر من 60 يومًا</span><i style="--w:12%;--c:#B42318"></i><b>7,600</b></div>
+      </div>
+    </div>
+    <div class="card"><div class="card__h">آخر الدفعات</div>
+      <div class="list">
+        <span><span>عبدالله س. · INV-3381</span><b class="num">14,950</b></span>
+        <span><span>فهد ع. · INV-3375</span><b class="num">15,400</b></span>
+        <span><span>سارة ح. · INV-3371</span><b class="num">17,250</b></span>
+      </div>
+    </div>
+  </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="shot" data-role="cs">
+    <div class="app">
+      <aside class="app__side">
+        <span class="app__brand"><svg viewBox="150 150 700 700" aria-hidden="true"><use href="#aC" fill="#fff"/><path transform="translate(508 508)" d="M0 0 L236 74 Q244 77 236 82 L132 118 Q122 122 118 132 L82 236 Q77 244 74 236 Z" fill="#87BF4E" stroke="#1B2740" stroke-width="22" paint-order="stroke"/></svg>نظام كليك</span>
+        <span class="app__nav"><i class="ph ph-squares-four"></i>الرئيسية</span>
+  <span class="app__nav"><i class="ph ph-tray"></i>الطلبات</span>
+  <span class="app__nav"><i class="ph ph-identification-card"></i>السير الذاتية</span>
+  <span class="app__nav"><i class="ph ph-file-text"></i>عقود الاستقدام</span>
+  <span class="app__nav"><i class="ph ph-arrows-left-right"></i>التأجير</span>
+  <span class="app__nav is-on"><i class="ph ph-users-three"></i>العملاء</span>
+  <span class="app__nav"><i class="ph ph-wallet"></i>المالية</span>
+  <span class="app__nav"><i class="ph ph-user-gear"></i>الموارد البشرية</span>
+  <span class="app__nav"><i class="ph ph-chart-bar"></i>التقارير</span>
+        <small>مكتب نموذجي · فرع الرياض</small>
+      </aside>
+      <div class="app__main">
+        <div class="app__top">
+          <span class="app__title">العملاء والشكاوى</span><span class="app__demo">بيانات تجريبية</span>
+          <span class="app__search"><i class="ph ph-magnifying-glass"></i>بحث برقم العقد أو اسم العميل</span>
+          <span class="app__chip"><i class="ph ph-buildings"></i>كل الفروع</span>
+          <span class="app__bell"><i class="ph ph-bell"></i></span>
+          <span class="app__avatar">م ع</span>
+        </div>
+        <div class="app__body">
+  <div class="row" style="grid-template-columns: 1.5fr 1fr">
+    <div class="card" style="padding-block:.4em"><span class="pin">1</span>
+      <div class="tbl" style="--cols: 1.2fr 1.15fr .75fr 1fr .9fr">
+        <div><span>العميل</span><span>الجوال</span><span>عقود</span><span>آخر تواصل</span><span>الحالة</span></div>
+        <div><span>عبدالله س.</span><span class="num muted">05•• ••• 412</span><span class="num">2</span><span>اليوم</span><span class="st st--warn">متابعة</span></div>
+        <div><span>نورة م.</span><span class="num muted">05•• ••• 087</span><span class="num">1</span><span>أمس</span><span class="st st--ok">نشط</span></div>
+        <div><span>مؤسسة نموذجية</span><span class="num muted">05•• ••• 930</span><span class="num">4</span><span>قبل 3 أيام</span><span class="st st--ok">نشط</span></div>
+        <div><span>فهد ع.</span><span class="num muted">05•• ••• 251</span><span class="num">1</span><span>قبل أسبوع</span><span class="st st--ok">نشط</span></div>
+        <div><span>سارة ح.</span><span class="num muted">05•• ••• 664</span><span class="num">1</span><span>قبل أسبوعين</span><span class="st st--mute">جديد</span></div>
+        <div><span>خالد ر.</span><span class="num muted">05•• ••• 718</span><span class="num">3</span><span>قبل شهر</span><span class="st st--ok">نشط</span></div>
+        <div><span>ريم ف.</span><span class="num muted">05•• ••• 349</span><span class="num">1</span><span>قبل شهر</span><span class="st st--ok">نشط</span></div>
+        <div><span>شركة نموذجية للخدمات</span><span class="num muted">05•• ••• 502</span><span class="num">6</span><span>قبل شهرين</span><span class="st st--ok">نشط</span></div>
+        <div><span>ماجد ط.</span><span class="num muted">05•• ••• 116</span><span class="num">0</span><span>قبل 3 أشهر</span><span class="st st--mute">غير نشط</span></div>
+      </div>
+    </div>
+    <div class="row" style="align-content:start">
+      <div class="card"><span class="pin">2</span><div class="card__h">الشكاوى <small>هذا الشهر</small></div>
+        <div class="kb">
+          <div><h4>جديدة <span>2</span></h4><p>تأخر موعد الوصول<small>#1024 · اليوم</small></p></div>
+          <div><h4>قيد المعالجة <span>3</span></h4><p>طلب استبدال<small>#0998 · أمس</small></p></div>
+          <div><h4>مغلقة <span>18</span></h4><p>استفسار عن الفاتورة<small>#1003 · تم الحل</small></p></div>
+        </div>
+      </div>
+      <div class="card"><span class="pin">3</span><div class="card__h">حملة رسائل <small>تذكير بموعد الوصول</small></div>
+        <div class="camp">
+          <span class="chiprow"><span class="st st--mute">رسائل نصية</span><span class="st st--mute">واتساب</span></span>
+          <span>أُرسلت إلى <b class="num">124</b> عميلًا · وصلت <b class="num">98%</b></span>
+          <span class="camp__bar"></span>
+        </div>
+      </div>
+      <div class="card"><div class="card__h">رضا العملاء <small>آخر 30 يومًا</small></div>
+        <div class="hb"><div style="grid-template-columns:1fr 3.4em"><i style="--w:92%;--c:#87BF4E"></i><b>4.6/5</b></div></div>
+      </div>
+    </div>
+  </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+            </div>
+            <svg class="cursor" viewBox="-10 -10 260 260" aria-hidden="true"><path d="M0 0 L236 74 Q244 77 236 82 L132 118 Q122 122 118 132 L82 236 Q77 244 74 236 Z" fill="#87BF4E" stroke="#1B2740" stroke-width="14" paint-order="stroke"/></svg>
+          </div>
+          <div class="callouts callouts--end"></div>
+        </div>
+        <p class="tour__note wrap">الشاشات نسخ توضيحية ببيانات تجريبية. <a class="more" href="#start">احجز عرضًا على بيانات تشبه بيانات مكتبك<i class="ph ph-arrow-left" aria-hidden="true"></i></a></p>
+      </section>
+  
+      <!-- ============================================================ 3.5 CHANNELS -->
+      <section class="sec channels" id="channels" aria-labelledby="channels-t">
+        <svg class="route" aria-hidden="true"><path class="route__p"/></svg>
+        <div class="wrap channels__grid">
+          <div class="channels__copy">
+            <p class="eyebrow"><b>05</b> الموقع والتطبيقات</p>
+            <h2 class="h2" id="channels-t">قنوات رقمية <span class="hl">تصل بها إلى عملائك</span></h2>
+            <ol class="chlist">
+              <li><b>الموقع الإلكتروني وبوابة العميل</b><span>اعرض السير الذاتية والباقات، ودع عملاءك يتابعون طلباتهم.</span></li>
+              <li><b>تطبيق العميل</b><span>طلب استقدام، متابعة الحالة، دفع إلكتروني، وإشعارات فورية.</span></li>
+              <li><b>تطبيق السائقين</b><span>مهام يومية، تتبع مباشر، وإثبات التسليم.</span></li>
+            </ol>
+            <a class="more" href="#">اكتشف الموقع والتطبيقات<i class="ph ph-arrow-left" aria-hidden="true"></i></a>
+          </div>
+          <div class="devices" aria-hidden="true">
+            <div class="dev dev--web" data-node>
+              <div class="dev__bar"><s></s><s></s><s></s><span>مكتبك · السير الذاتية</span></div>
+              <div class="web">
+                <div class="web__hd"><b>اختر العاملة المناسبة</b><span class="web__f">الجنسية ▾</span><span class="web__f">المهنة ▾</span></div>
+                <div class="web__cards">
+                  <div class="cv"><i></i><b>عاملة منزلية</b><span>الفلبين · خبرة 3 سنوات</span><em>متاحة</em></div>
+                  <div class="cv"><i></i><b>ممرضة منزلية</b><span>كينيا · خبرة 5 سنوات</span><em>متاحة</em></div>
+                  <div class="cv"><i></i><b>طباخة</b><span>إندونيسيا · خبرة 4 سنوات</span><em>محجوزة</em></div>
+                  <div class="cv"><i></i><b>عاملة منزلية</b><span>أوغندا · خبرة سنتان</span><em>متاحة</em></div>
+                </div>
+              </div>
+            </div>
+            <div class="dev dev--phone dev--client" data-node>
+              <div class="ph-scr">
+                <b class="ph-t">طلب #2041</b>
+                <ol class="steps"><li class="done">تم استلام الطلب</li><li class="done">صدرت التأشيرة</li><li class="now">حُجزت التذكرة</li><li>الوصول</li></ol>
+                <span class="ph-btn">ادفع الدفعة الثانية</span>
+              </div>
+            </div>
+            <div class="dev dev--phone dev--driver" data-node>
+              <div class="ph-scr ph-scr--map">
+                <svg viewBox="0 0 200 300" class="map"><path d="M0 60 H200 M0 170 H200 M60 0 V300 M150 0 V300 M0 250 L200 210" stroke="#E2DBCB" stroke-width="10" fill="none"/><path class="map__route" d="M60 280 V170 H150 V60" stroke="#87BF4E" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="280" r="9" fill="#1B2740"/><circle cx="150" cy="60" r="11" fill="#87BF4E" stroke="#fff" stroke-width="4"/></svg>
+                <div class="ph-task"><b>توصيل عاملة · 12 دقيقة</b><span>المهمة 3 من 5 اليوم</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- ============================================================ 3.6 SAFETY -->
+      <section class="sec safety" id="safety" aria-labelledby="safety-t">
+        <svg class="route" aria-hidden="true"><path class="route__p"/></svg>
+        <div class="wrap safety__grid">
+          <div class="safety__copy">
+            <p class="eyebrow eyebrow--dark"><b>06</b> بداية آمنة</p>
+            <h2 class="h2" id="safety-t">انتقال آمن، <span class="hl">ودعم مستمر</span></h2>
+            <ol class="onboard" data-stops>
+              <li><b>تحليل احتياجك</b><span>نفهم طريقة عمل مكتبك وفروعه.</span></li>
+              <li><b>الإعداد ونقل البيانات</b><span>ننقل عملاءك والسير الذاتية، أو بياناتك التشغيلية كاملة حسب الباقة.</span></li>
+              <li><b>تدريب فريقك</b><span>2–3 أيام حضوريًا في الرياض، أو 3–4 أيام عن بُعد.</span></li>
+              <li><b>التشغيل والدعم</b><span>هاتف فوري خلال أوقات العمل · واتساب خلال 30–60 دقيقة · بريد خلال 24 ساعة.</span></li>
+            </ol>
+            <p class="warranty"><b>365</b><span>يومًا ضمان على كل الباقات</span></p>
+          </div>
+          <figure class="rings" aria-label="سبع طبقات حماية حول نظامك">
+            <svg viewBox="0 0 600 600" aria-hidden="true">
+              <g class="rings__g" fill="none">
+                <circle r="92" cx="300" cy="300"/><circle r="122" cx="300" cy="300"/><circle r="152" cx="300" cy="300"/><circle r="182" cx="300" cy="300"/>
+                <circle r="212" cx="300" cy="300"/><circle r="242" cx="300" cy="300"/><circle r="272" cx="300" cy="300"/>
+              </g>
+              <g class="rings__n"><circle cx="365.1" cy="234.9" r="12"/><text x="365.1" y="239.4">1</text></g><g class="rings__n"><circle cx="386.3" cy="213.7" r="12"/><text x="386.3" y="218.2">2</text></g><g class="rings__n"><circle cx="407.5" cy="192.5" r="12"/><text x="407.5" y="197.0">3</text></g><g class="rings__n"><circle cx="428.7" cy="171.3" r="12"/><text x="428.7" y="175.8">4</text></g><g class="rings__n"><circle cx="449.9" cy="150.1" r="12"/><text x="449.9" y="154.6">5</text></g><g class="rings__n"><circle cx="471.1" cy="128.9" r="12"/><text x="471.1" y="133.4">6</text></g><g class="rings__n"><circle cx="492.3" cy="107.7" r="12"/><text x="492.3" y="112.2">7</text></g>
+              <circle cx="300" cy="300" r="70" fill="#1B2740" stroke="#87BF4E" stroke-width="2"/>
+              <svg x="250" y="250" width="100" height="100" style="color:#fff;--mark-cut:#1B2740"><use href="#mark"/></svg>
+            </svg>
+            <ol class="rings__legend"><li>استضافة داخل المملكة</li><li>نسخ احتياطي يومي</li><li>صلاحيات حسب الدور</li><li>تشفير SSL</li><li>جدار حماية وحماية DDoS</li><li>سجل العمليات</li><li>تحديثات أمنية</li></ol>
+            <figcaption>7 طبقات حماية · <span class="pend pend--dark">أسماء الطبقات بانتظار التأكيد</span></figcaption>
+          </figure>
+        </div>
+      </section>
+  
+      <!-- ============================================================ 3.7 PACKAGES + DEMO -->
+      <section class="sec start" id="start" aria-labelledby="start-t">
+        <svg class="route" aria-hidden="true"><path class="route__p"/><path class="route__p route__p--b"/><path class="route__p route__p--m"/></svg>
+        <div class="wrap">
+          <p class="eyebrow"><b>07</b> ابدأ</p>
+          <h2 class="h2" id="start-t">اختر البداية <span class="hl">المناسبة لشركتك</span></h2>
+          <div class="start__grid">
+            <div class="tracks" role="table" aria-label="مقارنة الباقات">
+              <div class="tracks__head" role="row">
+                <span role="columnheader" class="tk tk--f"><small>الميزة</small></span>
+                <span role="columnheader" class="tk tk--s"><b>باقة البداية</b><small>للشركات الناشئة</small></span>
+                <span role="columnheader" class="tk tk--b"><b>باقة الأعمال</b><small>للشركات متعددة الفروع</small></span>
+              </div>
+              <div class="tr" role="row"><span role="rowheader">المستخدمون والفروع</span><span role="cell">10 مستخدمين</span><span role="cell" class="plus">30 مستخدمًا + فرع</span></div>
+              <div class="tr" role="row"><span role="rowheader">الوحدات</span><span role="cell">النظام كاملًا</span><span role="cell">النظام كاملًا</span></div>
+              <div class="tr" role="row"><span role="rowheader">استضافة سعودية</span><span role="cell">50 GB</span><span role="cell" class="plus">100 GB</span></div>
+              <div class="tr" role="row"><span role="rowheader">نقل البيانات</span><span role="cell">العملاء والسير الذاتية</span><span role="cell" class="plus">نقل تشغيلي كامل</span></div>
+              <div class="tr" role="row"><span role="rowheader">التدريب</span><span role="cell">يومان حضوريًا أو 3 عن بُعد</span><span role="cell" class="plus">3 أيام حضوريًا أو 4 عن بُعد</span></div>
+              <div class="tr" role="row"><span role="rowheader">بوابة العميل</span><span role="cell">مشمولة</span><span role="cell">مشمولة</span></div>
+              <div class="tr" role="row"><span role="rowheader">رسائل SMS</span><span role="cell" class="no">—</span><span role="cell" class="plus">مشمولة</span></div>
+              <div class="tr" role="row"><span role="rowheader">بوابات الدفع</span><span role="cell" class="no">إضافة اختيارية</span><span role="cell" class="plus">مشمولة</span></div>
+              <div class="tr" role="row"><span role="rowheader">الدعم والضمان</span><span role="cell">3 قنوات · 365 يومًا</span><span role="cell">3 قنوات · 365 يومًا</span></div>
+              <p class="tracks__foot">الأسعار حسب احتياج شركتك، نرسلها مع العرض.</p>
+            </div>
+            <div class="demo">
+              <form class="demo__f" novalidate>
+                <h3>احجز عرضًا توضيحيًا</h3>
+                <p>نعرض لك النظام على بيانات تشبه بيانات مكتبك.</p>
+                <div class="f2"><label>الاسم الأول<input name="fname" autocomplete="given-name" required></label><label>الاسم الأخير<input name="lname" autocomplete="family-name" required></label></div>
+                <label>رقم الجوال<input name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="05xxxxxxxx" required></label>
+                <label>البريد الإلكتروني<input name="email" type="email" autocomplete="email" dir="ltr" required></label>
+                <label>اهتمامك<select name="service"><option>عرض توضيحي للنظام</option><option>باقة البداية</option><option>باقة الأعمال</option><option>الموقع والتطبيقات</option></select></label>
+                <label>رسالة (اختياري)<textarea name="msg" rows="2"></textarea></label>
+                <button class="btn btn--primary btn--lg" type="submit">احجز العرض</button>
+                <p class="demo__ok" role="status" hidden>تم استلام طلبك (نموذج تجريبي، لم يُرسل شيء).</p>
+                <p class="demo__alt">أو تواصل مباشرة: <a href="tel:0594249640" dir="ltr">0594249640</a> · <a href="#">واتساب</a></p>
+              </form>
+            </div>
+          </div>
+          <div class="faq">
+            <h3 class="faq__h">أسئلة قبل البدء</h3>
+            <details><summary>هل تنقلون بياناتنا الحالية؟</summary><p>نعم. باقة البداية تشمل نقل العملاء والسير الذاتية، وباقة الأعمال تشمل نقلًا تشغيليًا كاملًا.</p></details>
+            <details><summary>هل يتكامل النظام مع منصة مساند؟</summary><p>صياغة التكاملات بانتظار التأكيد من فريق كليك.</p></details>
+            <details><summary>كم يستغرق تدريب الفريق؟</summary><p>يومان إلى ثلاثة حضوريًا في الرياض، أو ثلاثة إلى أربعة أيام عن بُعد، حسب الباقة.</p></details>
+            <details><summary>أين تُستضاف بياناتنا؟</summary><p>على سحابة داخل المملكة مع نسخ احتياطي يومي.</p></details>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="ft">
+    <div class="ft__in">
+      <div class="ft__brand"><svg class="ft__core" aria-hidden="true" style="color:#fff"><use href="#mark"/></svg><p>نظام كليك لإدارة مكاتب وشركات الاستقدام.<br>يغنيك ويكفيك.</p></div>
+      <nav aria-label="روابط التذييل"><b>النظام</b><a href="#modules">الوحدات</a><a href="#channels">الموقع والتطبيقات</a><a href="#start">الباقات</a></nav>
+      <nav aria-label="الشركة"><b>الشركة</b><a href="#">من نحن</a><a href="#">المدونة</a><a href="#">سياسة الخصوصية</a><a href="#">شروط الاستخدام</a></nav>
+      <div><b>تواصل</b><a href="tel:0594249640" dir="ltr">0594249640</a><a href="#">واتساب</a><span>الرياض، المملكة العربية السعودية</span></div>
+    </div>
+    <p class="ft__c">© 2026 كليك آند مور · جميع الحقوق محفوظة</p>
+  </footer>
+
+  <!-- GSAP 3.15.1, one exact version for the hero and the homepage (the hero was built on 3.13.0; same major API) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/DrawSVGPlugin.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/MorphSVGPlugin.min.js" defer></script>
+  <script src="hero-a/hero-a.js" defer></script>
+  <script src="js/home-orbit.js" defer></script>
+</body>
+</html>
