@@ -1,0 +1,112 @@
+/* ==========================================================================
+   ClickERP prototype · Hero V4 (Phase 6): scroll architecture
+   Compositions are the APPROVED ones (S1 = V3, S2–S5 = V2), loaded read-only
+   from hero-v3.css / hero-v2.css / hero.css. This file only adds:
+   - progressive enhancement: stacked + fully visible by default (no JS / reduced
+     motion / small screens); pinned overlay mode only with .is-pinned (set by JS)
+   - fixed header with a solid state, progress row, scene-5 "lights on" veil
+   - neutralising V2/V3 CSS transitions so GSAP is the only animator
+   ========================================================================== */
+
+.p4 { --edge: max(var(--page-margin), calc((100vw - 1360px) / 2)); }
+
+/* ---------- Header: fixed overlay → solid on the light site ---------- */
+.p4 .c-header { position: fixed; transition: background-color 300ms var(--ease-standard), color 300ms, box-shadow 300ms; }
+.p4 .c-header__logo { inline-size: 150px; block-size: 64px; }
+.p4 .c-header.is-solid {
+  background: rgba(251, 250, 247, .92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); /* the only glass */
+  color: var(--navy-900); box-shadow: 0 1px 0 var(--border-subtle);
+}
+.p4 .c-header.is-solid .c-header__logo-img--white { opacity: 0; }
+.p4 .c-header.is-solid .c-header__logo-img--color { opacity: 1; }
+.p4 .c-header.is-solid .c-btn--secondary-dark { color: var(--navy-900); border-color: var(--navy-900); }
+.p4 .c-header.is-solid .c-header__menu { border-color: var(--slate-200); }
+.p4 .c-header :focus-visible { outline-color: var(--green-300); }
+.p4 .c-header.is-solid :focus-visible { outline-color: var(--navy-900); }
+
+/* ---------- GSAP is the only animator inside the hero ---------- */
+.v4-stage .v2-scene, .v4-stage .v3-scene, .v4-stage .v2-env, .v4-stage .v2-env *,
+.v4-stage .v2-canvas *, .v4-stage .v3-canvas * { transition: none !important; }
+.v4-stage .v3-node, .v4-stage .v2-node, .v4-stage .v2-stage { animation: none !important; }
+
+/* ===========================================================================
+   DEFAULT = STACKED (no JS, reduced motion, < 1024 px, short screens)
+   Every scene is a normal section in DOM order, fully visible.
+   =========================================================================== */
+.v4-stage { min-block-size: 0; }
+.v4-stage .v2-scene, .v4-stage .v3-scene {
+  position: relative; inset: auto; opacity: 1; visibility: visible;
+  min-block-size: max(100svh, 720px);
+}
+.v4-stage { --key-x: 86%; --key-y: -10%; --key-a: .55; --horizon: 70%; --floor-a: .7; } /* S1 lighting (from V3) */
+.v4-progress, .v4-scrollhint { display: none; }
+
+/* Stacked: the perspective floor belongs to the pinned stage only (it would streak across a tall stack) */
+.v4-stage:not(.is-pinned) .v2-env__floor, .v4-stage:not(.is-pinned) .v2-env__horizon { display: none; }
+
+/* ===========================================================================
+   PINNED MODE (JS adds .is-pinned on ≥1024×640 with motion allowed)
+   =========================================================================== */
+.v4-stage.is-pinned { block-size: 100svh; min-block-size: 640px; }
+.v4-stage.is-pinned .v2-scene, .v4-stage.is-pinned .v3-scene { position: absolute; inset: 0; min-block-size: 0; }
+.v4-stage.is-pinned .v2-scene:not(.is-active), .v4-stage.is-pinned .v3-scene:not(.is-active) { pointer-events: none; }
+.v4-stage.is-pinned .v2-art, .v4-stage.is-pinned .v3-art { will-change: transform; }
+
+/* Progress: horizontal row, bottom inline-end corner (clear of all art) */
+.v4-stage.is-pinned .v4-progress {
+  display: block; position: absolute; z-index: 7; inset-block-start: auto; inset-block-end: 22px; inset-inline-end: var(--edge); transform: none;
+}
+.v4-progress ol { display: flex; flex-direction: row; gap: 0; margin: 0; padding: 0; list-style: none; }
+.v4-progress .c-hero-progress__label { inset-inline-end: auto; left: 50%; bottom: calc(100% - 2px); transform: translateX(-50%); /* physical centring */ }
+.v4-progress button[aria-current="step"] .c-hero-progress__dot { inline-size: 26px; border-radius: 6px; }
+.v4-progress button[aria-current="step"] .c-hero-progress__label { opacity: 1; }
+
+/* Scroll hint (scene 1 only, faded out by the timeline) */
+.v4-stage.is-pinned .v4-scrollhint {
+  display: flex; position: absolute; z-index: 6; inset-block-end: 26px; left: 50%; transform: translateX(-50%); /* physical centring */
+  align-items: center; gap: 8px; font-size: var(--fs-caption); color: var(--slate-on-dark);
+}
+.v4-scrollhint .ph { font-size: 16px; }
+
+/* ===========================================================================
+   SCENE 5 · not pinned, paper, "lights on"
+   =========================================================================== */
+.v4-s5 { position: relative; isolation: isolate; overflow: hidden; background: var(--paper); color: var(--navy-900); }
+.v4-s5__veil { display: none; }
+.p4.is-motion .v4-s5__veil {
+  display: block; position: absolute; inset: 0; z-index: 5; pointer-events: none;
+  background: radial-gradient(60% 50% at 88% 0%, rgba(72, 96, 146, .45), rgba(14, 22, 38, 0) 70%), linear-gradient(180deg, #111C31 0%, #0E1626 100%);
+  clip-path: ellipse(150% 160% at 50% 0%);
+}
+
+/* ===========================================================================
+   Homepage stub (first light section)
+   =========================================================================== */
+.v4-next { padding: clamp(64px, 8vw, 112px) var(--page-margin); background: var(--paper); color: var(--navy-900); border-block-start: 1px solid var(--slate-200); }
+.v4-next__inner { max-inline-size: 1280px; margin-inline: auto; display: flex; flex-direction: column; gap: 32px; }
+.v4-next__eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: var(--fs-eyebrow); font-weight: 600; color: var(--green-700); }
+.v4-next__eyebrow::before { content: ""; inline-size: 28px; block-size: 2px; background: currentColor; border-radius: 2px; }
+.v4-next__title { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h2); line-height: 1.3; max-inline-size: 24ch; }
+.v4-next__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.v4-next__stats div { display: flex; flex-direction: column; gap: 6px; padding-inline: 24px; border-inline-start: 1px solid var(--slate-200); }
+.v4-next__stats div:first-child { padding-inline-start: 0; border: 0; }
+.v4-next__stats b { font-family: var(--font-display); font-size: var(--fs-stat); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.v4-next__stats span { font-size: var(--fs-small); color: var(--slate-600); }
+.v4-next__stats em { align-self: flex-start; padding: 2px 10px; border: 1px dashed var(--amber-700); border-radius: var(--radius-pill); background: var(--amber-100); color: var(--amber-700); font-size: 12px; font-style: normal; font-weight: 600; }
+
+/* ===========================================================================
+   Mobile (< 768): the approved mobile compositions, all scenes stacked
+   =========================================================================== */
+@media (max-width: 767px) {
+  .v4-stage .v2-scene, .v4-stage .v3-scene { display: block; min-block-size: 0; }
+  .v4-stage .v3-scene { padding: calc(var(--header-h) + 26px) var(--page-margin) 44px; }
+  .v4-stage .v2-scene { padding: 56px var(--page-margin) 48px; border-block-start: 1px solid rgba(255, 255, 255, .06); }
+  .v4-s5 { padding: 0; }
+  .v4-next__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .v4-next__stats div:nth-child(3) { padding-inline-start: 0; border: 0; }
+}
+
+/* Tablet stacked (768–1023): art canvases live inside each 100svh scene */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .v4-stage .v2-scene, .v4-stage .v3-scene { min-block-size: max(100svh, 680px); }
+}

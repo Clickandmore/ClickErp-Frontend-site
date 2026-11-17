@@ -1,0 +1,143 @@
+/* ==========================================================================
+   ClickERP prototype · Design tokens (approved Phase 4, Direction B)
+   Source of truth: docs/redesign/design-system.md · MASTER.md
+   ========================================================================== */
+
+:root {
+  /* --- Colour primitives --------------------------------------------- */
+  --navy-950: #0E1626;
+  --navy-900: #1B2740;
+  --navy-800: #24345A;
+  --navy-700: #33466F;
+  --slate-700: #3E4A5E;
+  --slate-600: #566276;
+  --slate-500: #6D788C;
+  --slate-300: #AEB6C3;
+  --slate-200: #D5DAE1;
+  --slate-on-dark: #B9C2D0;
+  --paper: #FBFAF7;
+  --sand-50: #F4F2EC;
+  --sand-100: #EAE6DD;
+  --white: #FFFFFF;
+  --green-500: #87BF4E;
+  --green-400: #9CCB6A;
+  --green-300: #B4D98F;
+  --green-700: #4A7A1F;
+  --green-800: #3B6418;
+  --green-100: #E9F4DE;
+  --amber-700: #9A4A06;
+  --amber-100: #FDF0D5;
+  --red-700: #B42318;
+  --red-100: #FDE7E4;
+  --blue-700: #2B4C8C;
+  --blue-100: #E6ECF7;
+
+  /* --- App (dashboard illustration) surfaces -------------------------- */
+  --app-bg: #F3F5F8;
+  --app-border: #E3E8EF;
+
+  /* --- Data visualisation --------------------------------------------- */
+  --viz-1: #1B2740;
+  --viz-2: #87BF4E;
+  --viz-3: #6D788C;
+  --viz-4: #D9932B;
+  --viz-5: #9FB3D1;
+
+  /* --- Semantic (light context) --------------------------------------- */
+  --surface-page: var(--paper);
+  --surface-alt: var(--sand-50);
+  --surface-raised: var(--white);
+  --text-strong: var(--navy-900);
+  --text-body: var(--navy-900);
+  --text-secondary: var(--slate-700);
+  --text-muted: var(--slate-600);
+  --border-subtle: var(--slate-200);
+  --border-control: var(--slate-500);
+  --accent-text: var(--green-700);
+  --focus-ring: var(--navy-900);
+
+  /* --- Typography ------------------------------------------------------ */
+  --font-display: "Readex Pro", "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --font-text: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+
+  --fs-display: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
+  --fs-display-2: clamp(2.125rem, 1.45rem + 2.9vw, 3.75rem);
+  --fs-h1: clamp(2.125rem, 1.6rem + 2.2vw, 3.375rem);
+  --fs-h2: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  --fs-h3: clamp(1.3125rem, 1.18rem + .55vw, 1.625rem);
+  --fs-h4: clamp(1.125rem, 1.08rem + .2vw, 1.25rem);
+  --fs-lead: clamp(1.125rem, 1.05rem + .3vw, 1.3125rem);
+  --fs-body: clamp(1rem, .97rem + .12vw, 1.0625rem);
+  --fs-small: .9375rem;
+  --fs-label: .9375rem;
+  --fs-button: 1rem;
+  --fs-caption: .8125rem;
+  --fs-eyebrow: .875rem;
+  --fs-stat: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+
+  /* --- Spacing --------------------------------------------------------- */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px; --space-32: 128px;
+
+  /* --- Sizing / radius / elevation ------------------------------------ */
+  --control-sm: 40px; --control-md: 48px; --control-lg: 56px;
+  --target-min: 44px;
+  --header-h: 72px;
+  --radius-xs: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 24px; --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(14, 22, 38, .06);
+  --shadow-md: 0 6px 16px -4px rgba(14, 22, 38, .10), 0 2px 4px rgba(14, 22, 38, .04);
+  --shadow-lg: 0 20px 48px -16px rgba(14, 22, 38, .22);
+  --shadow-frame: 0 40px 80px -28px rgba(5, 10, 20, .55), inset 0 0 0 1px rgba(255, 255, 255, .06);
+
+  /* --- Layout ---------------------------------------------------------- */
+  --container: 1280px;
+  --container-wide: 1440px;
+  --gutter: 16px;
+  --page-margin: 16px;
+
+  /* --- Motion ---------------------------------------------------------- */
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-moderate: 360ms;
+  --dur-slow: 600ms;
+  --ease-standard: cubic-bezier(.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(.16, 1, .3, 1);
+  --ease-exit: cubic-bezier(.4, 0, 1, 1);
+}
+
+@media (min-width: 480px)  { :root { --page-margin: 20px; } }
+@media (min-width: 768px)  { :root { --gutter: 24px; --page-margin: 32px; } }
+@media (min-width: 1024px) { :root { --page-margin: 40px; } }
+@media (min-width: 1280px) { :root { --gutter: 32px; } }
+@media (max-width: 1023px) { :root { --header-h: 64px; } }
+
+/* --- Base -------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-body);
+  font-family: var(--font-text);
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  letter-spacing: 0;               /* never track Arabic */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+img, svg { display: block; max-inline-size: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+.u-visually-hidden {
+  position: absolute !important; inline-size: 1px; block-size: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.u-ltr { direction: ltr; unicode-bidi: isolate; }
+/* Directional icons are authored LTR-forward and mirrored in RTL */
+[dir="rtl"] .u-flip-rtl { transform: scaleX(-1); }
