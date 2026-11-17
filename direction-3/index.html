@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>الحركة المتصلة · تجربة 01 · نظام كليك</title>
+<meta name="description" content="تجربة حركة معزولة: الانتقال من الواجهة إلى قسم التحوّل (قبل / بعد) في موقع نظام كليك.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="cm.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="cm-skip" href="#after">تخطَّ التجربة</a>
+
+<header class="cm-head">
+  <a class="cm-logo" href="#" aria-label="نظام كليك">
+    <img class="logo-w" src="assets/clickerp-logo-white.png" alt="" width="613" height="268">
+    <img class="logo-c" src="assets/clickerp-logo-color.png" alt="" width="613" height="268">
+  </a>
+  <span class="cm-badge">تجربة 01 · الحركة المتصلة</span>
+  <a class="cm-btn cm-btn--primary cm-btn--sm cm-head__cta" href="#">احجز عرضًا توضيحيًا</a>
+</header>
+
+<!-- the ClickERP mark: C (the system) + ripple (the click) + cursor (the action) — vector study of the logo for motion -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="cm-mark" viewBox="0 0 200 200">
+      <circle cx="104" cy="100" r="31" fill="none" stroke="currentColor" stroke-width="8"/>
+      <circle cx="104" cy="100" r="14" fill="none" stroke="currentColor" stroke-width="8"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="34" pathLength="360" stroke-dasharray="292 68" transform="rotate(34 100 100)"/>
+      <path d="M104 100 L188 130 L154 146 L138 180 Z" fill="#87BF4E"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+  <div class="cm" id="cm">
+    <div class="cm-stage">
+      <div class="cm-bg" aria-hidden="true">
+        <div class="cm-night">
+          <svg class="cm-aura" viewBox="0 0 1000 1000"><circle cx="500" cy="500" r="190"/><circle cx="500" cy="500" r="270"/><circle cx="500" cy="500" r="370"/><circle cx="500" cy="500" r="490"/></svg>
+        </div>
+        <div class="cm-paper">
+          <svg class="cm-rings" viewBox="0 0 1400 1400"><circle cx="700" cy="700" r="150"/><circle cx="700" cy="700" r="260"/><circle cx="700" cy="700" r="400"/><circle cx="700" cy="700" r="580"/></svg>
+        </div>
+      </div>
+
+      <!-- Scene A · hero and brand introduction -->
+      <section class="cm-scene cm-a" aria-labelledby="cm-h1">
+        <div class="cm-a__copy">
+          <p class="cm-eyebrow" data-ln>نظام كليك لإدارة مكاتب وشركات الاستقدام</p>
+          <h1 id="cm-h1" class="cm-h1"><span class="ln" data-ln>كل أعمال الاستقدام</span> <span class="ln em" data-ln>في نظام واحد</span></h1>
+          <p class="cm-lead" data-ln>الطلبات والعقود والمالية والعملاء في منصة سعودية واحدة، مبنية من داخل القطاع.</p>
+          <div class="cm-ctas" data-ln>
+            <a class="cm-btn cm-btn--primary" href="#">احجز عرضًا توضيحيًا</a>
+            <a class="cm-btn cm-btn--ghost" href="#">اكتشف النظام</a>
+          </div>
+        </div>
+        <div class="cm-slot cm-slot--hero" data-slot="hero"><svg class="cm-static-mark" aria-hidden="true" focusable="false"><use href="#cm-mark"/></svg></div>
+        <p class="cm-hint" aria-hidden="true"><i class="ph ph-mouse-scroll"></i>مرّر لترى كيف يعمل</p>
+      </section>
+
+      <!-- Scene B · business transformation (before / after) -->
+      <section class="cm-scene cm-b" aria-labelledby="cm-h2">
+        <header class="cm-b__head">
+          <p class="cm-eyebrow cm-eyebrow--dark">قبل وبعد</p>
+          <h2 id="cm-h2">من المتابعة اليدوية <span>إلى إدارة واضحة ومنظمة</span></h2>
+        </header>
+        <div class="cm-b__grid">
+          <div class="cm-before">
+            <h3 class="cm-col-t">قبل نظام كليك</h3>
+            <ul class="cm-before__list">
+              <li class="cm-card"><div class="cm-card__in"><i class="ph ph-file-xls" aria-hidden="true"></i><span>ملفات Excel متفرقة لكل قسم</span><b class="x" aria-hidden="true"><i class="ph ph-x"></i></b></div></li>
+              <li class="cm-card"><div class="cm-card__in"><i class="ph ph-chats-circle" aria-hidden="true"></i><span>متابعة الطلبات عبر مجموعات واتساب</span><b class="x" aria-hidden="true"><i class="ph ph-x"></i></b></div></li>
+              <li class="cm-card"><div class="cm-card__in"><i class="ph ph-airplane-tilt" aria-hidden="true"></i><span>تأخر التذاكر والتأشيرات دون تنبيه</span><b class="x" aria-hidden="true"><i class="ph ph-x"></i></b></div></li>
+              <li class="cm-card"><div class="cm-card__in"><i class="ph ph-buildings" aria-hidden="true"></i><span>صعوبة معرفة أداء كل فرع</span><b class="x" aria-hidden="true"><i class="ph ph-x"></i></b></div></li>
+            </ul>
+          </div>
+          <div class="cm-hub">
+            <div class="cm-hub__mark" data-slot="hub"><svg class="cm-static-mark" aria-hidden="true" focusable="false"><use href="#cm-mark"/></svg></div>
+            <span class="cm-hub__label">نظام كليك</span>
+          </div>
+          <div class="cm-after">
+            <h3 class="cm-col-t">مع نظام كليك</h3>
+            <ul class="cm-after__list">
+              <li class="cm-row"><i class="ph-fill ph-check-circle" aria-hidden="true"></i><span>كل الأقسام في نظام واحد</span></li>
+              <li class="cm-row"><i class="ph-fill ph-check-circle" aria-hidden="true"></i><span>مراحل العقد واضحة لكل الفريق</span></li>
+              <li class="cm-row"><i class="ph-fill ph-check-circle" aria-hidden="true"></i><span>تنبيهات قبل أي تأخير</span></li>
+              <li class="cm-row"><i class="ph-fill ph-check-circle" aria-hidden="true"></i><span>تقارير فورية لكل فرع</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- moving layer (decorative; the content above is the real, readable DOM) -->
+      <svg class="cm-wires" aria-hidden="true" focusable="false"></svg>
+      <div class="cm-mark" aria-hidden="true">
+        <svg viewBox="0 0 200 200" width="200" height="200" focusable="false">
+          <g class="rings"><circle cx="104" cy="100" r="31" fill="none" stroke="currentColor" stroke-width="8"/><circle cx="104" cy="100" r="14" fill="none" stroke="currentColor" stroke-width="8"/></g>
+          <circle class="arc" cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="34" pathLength="360" stroke-dasharray="292 68" transform="rotate(34 100 100)"/>
+        </svg>
+      </div>
+      <div class="cm-click" aria-hidden="true"></div>
+      <div class="cm-cursor" aria-hidden="true"><svg viewBox="0 0 90 90" width="90" height="90" focusable="false"><path d="M0 0 L84 30 L50 46 L34 80 Z" fill="#87BF4E"/></svg></div>
+    </div>
+  </div>
+
+  <section class="cm-next" id="after" aria-label="نهاية التجربة">
+    <p><b>نهاية التجربة 01.</b> الانتقال من الواجهة إلى قسم «قبل وبعد». بقية الصفحة الرئيسية خارج نطاق هذه التجربة.</p>
+    <a class="cm-btn cm-btn--ghost cm-btn--sm" href="#cm">العودة إلى البداية</a>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" defer></script>
+<script src="cm.js" defer></script>
+</body>
+</html>
