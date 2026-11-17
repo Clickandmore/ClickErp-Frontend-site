@@ -1,0 +1,212 @@
+/* ==========================================================================
+   ClickERP prototype · Hero D + A «لحظات حقيقية» (comparison build vs V4)
+   - Default = STACKED: five readable sections (no JS, reduced motion, < 1024 px)
+   - .is-pinned (added by js/hero-d.js on ≥1024×640 with motion) = one pinned stage
+     with shared photo layers, a morphing photo frame, the green ribbon (SVG)
+     and the cursor
+   - Colour rule: green fills carry NAVY text; green is never text on white
+   ========================================================================== */
+
+.pd { --edge: max(48px, calc((100vw - 1320px) / 2)); --copy-w: min(600px, 42vw); background: var(--paper); }
+
+/* ---------- Header: fixed overlay → solid on the light page (as V4) ---------- */
+.pd .c-header { position: fixed; transition: background-color 300ms var(--ease-standard), color 300ms, box-shadow 300ms; }
+.pd .c-header__logo { inline-size: 150px; block-size: 64px; }
+.pd .c-header.is-solid {
+  background: rgba(251, 250, 247, .92); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  color: var(--navy-900); box-shadow: 0 1px 0 var(--border-subtle);
+}
+.pd .c-header.is-solid .c-header__logo-img--white { opacity: 0; }
+.pd .c-header.is-solid .c-header__logo-img--color { opacity: 1; }
+.pd .c-header.is-solid .c-btn--secondary-dark { color: var(--navy-900); border-color: var(--navy-900); }
+.pd .c-header :focus-visible { outline-color: var(--green-300); }
+.pd .c-header.is-solid :focus-visible { outline-color: var(--navy-900); }
+
+/* ===========================================================================
+   Shared copy styles (both modes)
+   =========================================================================== */
+.hd { position: relative; isolation: isolate; overflow: clip; background: var(--navy-950); color: var(--white); }
+.hd-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
+.hd-eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font-size: var(--fs-eyebrow); font-weight: 600; color: var(--green-300); }
+.hd-num { font-family: var(--font-display); letter-spacing: .04em; }
+.hd-num::after { content: ""; display: inline-block; inline-size: 24px; block-size: 2px; margin-inline-start: 10px; vertical-align: middle; background: currentColor; border-radius: 2px; }
+.hd-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-display-2); line-height: 1.28; }
+.hd-s1 .hd-title { font-size: var(--fs-display); line-height: 1.22; }
+.hd-line { display: block; }
+.hd-w { display: inline-block; }
+
+/* The A-hybrid "highlight chip": green fill grows from the inline-start (right), navy label */
+.hd-mark {
+  --mk: 1;
+  color: var(--navy-900);
+  background: linear-gradient(var(--green-500), var(--green-500)) no-repeat 100% 58% / calc(var(--mk) * 100%) 86%;
+  padding-inline: .22em; border-radius: .14em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.hd-lead { margin: 0; max-inline-size: 46ch; font-size: var(--fs-lead); line-height: 1.8; color: var(--slate-on-dark); }
+.hd-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.hd-ctas .ph { font-size: 1.15em; }
+
+/* Journey steps: the dot column sits on the inline-END edge (between photo and copy),
+   so in pinned mode the green ribbon runs through every dot */
+.hd-steps { position: relative; inline-size: min(100%, 400px); margin: 4px 0 0; padding: 0; list-style: none; }
+.hd-steps::before { content: ""; position: absolute; inset-block: 18px; inset-inline-end: 6px; inline-size: 2px; background: rgba(255, 255, 255, .14); border-radius: 2px; }
+.hd-step { display: grid; grid-template-columns: 1fr 14px; align-items: center; gap: 16px; padding-block: 8px; font-size: 1.0625rem; color: var(--white); }
+.hd-step__dot { position: relative; z-index: 1; inline-size: 14px; block-size: 14px; border-radius: 50%; background: var(--green-500); }
+.hd-step--final { font-size: 1.25rem; font-weight: 600; }
+.hd-step--final .hd-step__dot { box-shadow: 0 0 0 6px rgba(135, 191, 78, .3); }
+
+/* KPI chips (fictional demo numbers) */
+.hd-kpis { display: flex; flex-wrap: wrap; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.hd-kpi {
+  display: flex; flex-direction: column; gap: 2px; padding: 14px 20px; border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .26);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+}
+.hd-kpi b { font-family: var(--font-display); font-size: 1.9rem; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.hd-kpi span { font-size: .875rem; color: var(--slate-on-dark); }
+
+/* Stakeholder chips (text only: no third-party logos) */
+.hd-orbit { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.hd-orbit li {
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: var(--radius-pill);
+  background: rgba(14, 22, 38, .8); border: 1px solid rgba(135, 191, 78, .7); font-size: .95rem; font-weight: 600; white-space: nowrap;
+}
+.hd-orbit li::after { content: ""; inline-size: 7px; block-size: 7px; border-radius: 50%; background: var(--green-500); }
+
+/* Media (stacked mode; S5's photo is also used in pinned mode) */
+.hd-media { margin: 0; }
+.hd-media img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.hd-media--card, .hd-media--wide, .hd-media--team { overflow: hidden; border-radius: var(--radius-xl); }
+.hd-media--card { aspect-ratio: 4 / 3; }
+.hd-media--wide { aspect-ratio: 16 / 10; }
+.hd-media--team { aspect-ratio: 16 / 9; }
+.hd-media--lens { position: relative; inline-size: min(76vw, 360px); aspect-ratio: 1; justify-self: center; }
+.hd-media__clip { position: absolute; inset: 0; overflow: hidden; border-radius: 50%; box-shadow: 0 0 0 3px var(--green-500), 0 0 0 18px rgba(135, 191, 78, .16); }
+.hd-media__cursor { position: absolute; inset-block-end: 2%; inset-inline-start: 4%; inline-size: 18%; fill: var(--green-500); filter: drop-shadow(0 6px 12px rgba(0, 0, 0, .35)); }
+
+/* ===========================================================================
+   DEFAULT = STACKED
+   =========================================================================== */
+.hd-layers, .hd-lines, .hd-cursor, .hd-progress, .hd-scrollhint { display: none; }
+.hd-scene { position: relative; display: grid; gap: 28px; padding: 64px var(--page-margin) 56px; border-block-start: 1px solid rgba(255, 255, 255, .06); }
+.hd-s1 {
+  padding-block-start: calc(var(--header-h) + 32px); border: 0;
+  background: linear-gradient(rgba(14, 22, 38, .84), rgba(14, 22, 38, .94)), url("../assets/photos/d0-before.jpg") center / cover no-repeat;
+}
+.hd-s5 { background: var(--paper); color: var(--navy-900); border: 0; }
+.hd-s5 .hd-eyebrow { color: var(--slate-600); }
+.hd-s5 .hd-lead { color: var(--slate-600); }
+.hd-media { order: -1; }                       /* mobile: photo first, as in the Figma mobile frames */
+.hd-s5 .hd-media { order: 0; }
+
+@media (min-width: 768px) {
+  .hd-scene { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 48px; padding: 88px var(--edge); min-block-size: min(100svh, 860px); }
+  .hd-media { order: 0; }                      /* copy on the inline-start (right), photo on the end */
+  .hd-s3 .hd-media { order: -1; }              /* zig-zag */
+  .hd-s3 .hd-kpis, .hd-s4 .hd-orbit { grid-column: 1 / -1; }
+  .hd-s4 { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .hd-s4 .hd-copy { align-items: center; }
+  .hd-s4 .hd-media { inline-size: min(100%, 1100px); }
+  .hd-s5 { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .hd-s5 .hd-copy { align-items: center; }
+  .hd-s5 .hd-media { inline-size: min(100%, 1240px); }
+}
+
+/* ===========================================================================
+   PINNED MODE (JS adds .is-pinned)
+   =========================================================================== */
+.hd.is-pinned { block-size: 100svh; min-block-size: 640px; }
+.hd.is-pinned .hd-layers { display: block; position: absolute; inset: 0; }
+.hd.is-pinned .hd-scene { position: absolute; inset: 0; z-index: 5; min-block-size: 0; padding: calc(var(--header-h) + 32px) var(--edge) 88px; background: none; border: 0; grid-template-columns: minmax(0, 1fr); }
+/* absolutely positioned overlays must use the scene's padding box, not a grid area */
+.hd.is-pinned .hd-s3 .hd-kpis, .hd.is-pinned .hd-s4 .hd-orbit { grid-column: auto; grid-row: auto; }
+.hd.is-pinned .hd-media { display: none; }
+.hd.is-pinned .hd-s5 { z-index: 8; }
+
+/* Layers: physical left/top are deliberate. JS writes pixel coordinates measured
+   from getBoundingClientRect, so the frame, cursor and orbit chips use a
+   physical origin. */
+.hd-bg { position: absolute; inset: 0; z-index: 1; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.hd-shade { position: absolute; inset: 0; z-index: 2; background: linear-gradient(to left, rgba(14, 22, 38, .95) 0%, rgba(14, 22, 38, .86) 48%, rgba(14, 22, 38, .72) 100%); }
+.hd-frame { position: absolute; left: 0; top: 0; z-index: 3; overflow: hidden; background: var(--navy-900); will-change: width, height, left, top; }
+.hd-frame img { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.hd-frame img + img { opacity: 0; }
+.hd-scrim { position: absolute; inset: 0; z-index: 4; opacity: 0; visibility: hidden; }
+.hd-scrim--3 { background: linear-gradient(to right, rgba(14, 22, 38, .94) 0%, rgba(14, 22, 38, .6) 36%, rgba(14, 22, 38, 0) 62%), linear-gradient(0deg, rgba(14, 22, 38, .6), rgba(14, 22, 38, 0) 30%); }
+.hd-scrim--4 { background: linear-gradient(180deg, rgba(14, 22, 38, .2) 0%, rgba(14, 22, 38, .25) 42%, rgba(14, 22, 38, .96) 100%); }
+.hd-slot { position: absolute; visibility: hidden; pointer-events: none; }
+.hd-slot--lens { --d: min(62svh, 36vw); inline-size: var(--d); block-size: var(--d); inset-inline-end: calc(29% - var(--d) / 2); inset-block-start: calc(54% - var(--d) / 2); }
+.hd-slot--card { inset-inline-end: var(--edge); inset-block-start: calc(var(--header-h) + 40px); inset-block-end: 96px; inline-size: calc(100% - var(--edge) * 2 - var(--copy-w) - 96px); }
+.hd-light { position: absolute; inset: 0; z-index: 6; background: var(--paper); clip-path: circle(0 at 50% 50%); }
+
+.hd.is-pinned .hd-lines { display: block; position: absolute; inset: 0; z-index: 7; inline-size: 100%; block-size: 100%; overflow: visible; pointer-events: none; }
+.hd-lines .hd-ribbon { fill: none; stroke: var(--green-500); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.hd-lines .hd-ring { fill: none; stroke: var(--green-500); }
+.hd-lines .hd-pulse { fill: none; stroke: var(--green-300); stroke-width: 2; }
+
+.hd.is-pinned .hd-cursor { display: block; position: absolute; left: 0; top: 0; z-index: 9; inline-size: 44px; block-size: 44px; pointer-events: none; }
+.hd-cursor svg { display: block; inline-size: 100%; block-size: 100%; fill: var(--green-500); filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .4)); }
+
+/* Scene layouts (pinned) */
+.hd.is-pinned .hd-s1, .hd.is-pinned .hd-s2 { display: grid; align-content: center; justify-items: start; }
+.hd.is-pinned .hd-s1 .hd-copy, .hd.is-pinned .hd-s2 .hd-copy { inline-size: var(--copy-w); }
+.hd.is-pinned .hd-s2 .hd-steps::before { display: none; }       /* the ribbon replaces the static track */
+.hd.is-pinned .hd-s3 { display: grid; align-content: center; justify-items: end; }
+.hd.is-pinned .hd-s3 .hd-copy { inline-size: min(520px, 38vw); }
+.hd.is-pinned .hd-s3 .hd-kpis { display: block; position: absolute; inset: 0; pointer-events: none; }
+.hd.is-pinned .hd-kpi { position: absolute; }
+.hd.is-pinned .hd-kpi:nth-child(1) { inset-inline-start: 10%; inset-block-start: 22%; }
+.hd.is-pinned .hd-kpi:nth-child(2) { inset-inline-start: 4%;  inset-block-start: 42%; }
+.hd.is-pinned .hd-kpi:nth-child(3) { inset-inline-start: 17%; inset-block-start: 63%; }
+.hd.is-pinned .hd-s4 { display: grid; align-content: end; justify-items: center; text-align: center; padding-block-end: 92px; }
+.hd.is-pinned .hd-s4 .hd-copy { align-items: center; gap: 14px; }
+.hd.is-pinned .hd-s4 .hd-title .hd-line { display: inline; }
+.hd.is-pinned .hd-s4 .hd-orbit { display: block; position: absolute; inset: 0; pointer-events: none; }
+.hd.is-pinned .hd-s4 .hd-orbit li { position: absolute; left: 0; top: 0; }
+.hd.is-pinned .hd-s5 { display: grid; grid-template-rows: auto minmax(0, 1fr); justify-items: center; gap: 28px; padding-block: calc(var(--header-h) + 24px) 80px; color: var(--navy-900); text-align: center; }
+.hd.is-pinned .hd-s5 .hd-copy { align-items: center; gap: 16px; }
+.hd.is-pinned .hd-s5 .hd-lead { max-inline-size: 60ch; }
+.hd.is-pinned .hd-s5 .hd-media { display: block; inline-size: min(100%, 1240px); block-size: 100%; aspect-ratio: auto; min-block-size: 0; }
+
+/* Progress: bottom inline-end corner */
+.hd.is-pinned .hd-progress { display: block; position: absolute; z-index: 10; inset-block-end: 24px; inset-inline-end: var(--edge); }
+.hd-progress ol { display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.hd-progress button { display: inline-flex; align-items: center; gap: 8px; min-block-size: 44px; padding-inline: 6px; border: 0; background: none; color: rgba(255, 255, 255, .55); font: inherit; font-size: var(--fs-caption); cursor: pointer; }
+.hd-progress__dot { inline-size: 10px; block-size: 10px; border-radius: 6px; background: currentColor; transition: inline-size 200ms var(--ease-standard), background-color 200ms; }
+.hd-progress__label { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.hd-progress button[aria-current="step"] { color: var(--white); }
+.hd-progress button[aria-current="step"] .hd-progress__dot { inline-size: 26px; background: var(--green-500); }
+.hd-progress button[aria-current="step"] .hd-progress__label { position: static; inline-size: auto; block-size: auto; overflow: visible; clip-path: none; }
+.hd-progress button:focus-visible { outline: 2px solid var(--green-300); outline-offset: 2px; border-radius: 8px; }
+.hd.on-paper .hd-progress button { color: rgba(27, 39, 64, .5); }
+.hd.on-paper .hd-progress button[aria-current="step"] { color: var(--navy-900); }
+.hd.on-paper .hd-progress button:focus-visible { outline-color: var(--navy-900); }
+
+.hd.is-pinned .hd-scrollhint {
+  display: flex; position: absolute; z-index: 10; inset-block-end: 30px; left: 50%; transform: translateX(-50%); /* physical centring */
+  align-items: center; gap: 8px; font-size: var(--fs-caption); color: var(--slate-on-dark);
+}
+
+/* ===========================================================================
+   Homepage stub (first light section)
+   =========================================================================== */
+.hd-next { padding: clamp(64px, 8vw, 112px) var(--page-margin); background: var(--paper); color: var(--navy-900); border-block-start: 1px solid var(--slate-200); }
+.hd-next__inner { max-inline-size: 1280px; margin-inline: auto; display: flex; flex-direction: column; gap: 32px; }
+.hd-next__eyebrow { display: inline-flex; align-items: center; gap: 10px; margin: 0; font-size: var(--fs-eyebrow); font-weight: 600; color: var(--green-700); }
+.hd-next__eyebrow::before { content: ""; inline-size: 28px; block-size: 2px; background: currentColor; border-radius: 2px; }
+.hd-next__title { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h2); line-height: 1.3; max-inline-size: 24ch; }
+.hd-next__stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.hd-next__stats div { display: flex; flex-direction: column; gap: 6px; padding-inline: 24px; border-inline-start: 1px solid var(--slate-200); }
+.hd-next__stats div:first-child { padding-inline-start: 0; border: 0; }
+.hd-next__stats b { font-family: var(--font-display); font-size: var(--fs-stat); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.hd-next__stats span { font-size: var(--fs-small); color: var(--slate-600); }
+.hd-next__stats em { align-self: flex-start; padding: 2px 10px; border: 1px dashed var(--amber-700); border-radius: var(--radius-pill); background: var(--amber-100); color: var(--amber-700); font-size: 12px; font-style: normal; font-weight: 600; }
+.hd-next__proto { margin: 0; padding: 12px 16px; border-radius: var(--radius-md); background: var(--sand-100); color: var(--slate-700); font-size: var(--fs-small); }
+.hd-next__proto a { color: var(--navy-900); font-weight: 600; }
+
+@media (max-width: 767px) {
+  .hd-next__stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .hd-next__stats div:nth-child(3) { padding-inline-start: 0; border: 0; }
+  .hd-ctas .c-btn { flex: 1 1 100%; }
+}
